@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C7E4E8"
     tools:context=".Inregistrare">
 
     <ScrollView
@@ -19,7 +20,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="730dp"
-                android:background="#F6F1EB"
+                android:background="#C7E4E8"
                 tools:context=".SignIn">
 
                 <EditText
@@ -98,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
+                    android:background="#A7A8AE"
                     android:text="Inapoi"
                     android:textAllCaps="false"
                     android:textStyle="bold"
