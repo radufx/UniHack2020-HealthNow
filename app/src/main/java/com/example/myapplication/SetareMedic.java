@@ -15,7 +15,7 @@ public class SetareMedic extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setare_medic);
 
-        button = findViewById(R.id.inapoi_main_inregistrare);
+        button = findViewById(R.id.inapoi_inregistrare);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,5 +24,6 @@ public class SetareMedic extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }

@@ -15,22 +15,22 @@ public class Inregistrare extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inregistrare);
 
-        button = findViewById(R.id.sign_pacient);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Inregistrare.this, SetareProfil.class);
-                startActivity(intent);
-            }
-        });
-
         button = findViewById(R.id.sign_medic);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Inregistrare.this, SetareMedic.class);
+                startActivity(intent);
+            }
+        });
+
+        button = findViewById(R.id.sign_pacient);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Inregistrare.this, SetareProfil.class);
                 startActivity(intent);
             }
         });
