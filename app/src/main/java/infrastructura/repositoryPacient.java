@@ -15,28 +15,45 @@ public class repositoryPacient {
 
     public void adauga_pacient (Pacient pacient) throws Exception {
         if (this.lista_pacienti.contains(pacient)){
-            throw new Exception("Element deja existent");
+            throw new Exception("Pacient deja existent!");
         }
+        this.lista_pacienti.add(pacient);
     }
 
     public int size (){
-        return 0;
+        return this.lista_pacienti.size();
     }
 
-    public void sterge_pacient(){
+    public void sterge_pacient (Pacient pacient) throws Exception  {
+        if (!this.lista_pacienti.contains(pacient)){
+            throw new Exception("Pacient inexistent!");
+        }
+        this.lista_pacienti.remove(pacient);
+    }
+
+    public void modifica_pacient(Pacient pacient) throws Exception {
+        if (!this.lista_pacienti.contains(pacient)){
+            throw new Exception("Pacient inexistent!");
+        }
+        for (int i=0; i<this.lista_pacienti.size(); ++i){
+            if (this.lista_pacienti.get(i).equals(pacient) ) this.lista_pacienti.set(i, pacient);
+        }
 
     }
 
-    public void modifica_pacient(){
+    public Pacient cauta_pacient (String username) throws Exception {
 
-    }
+        for (int i=0; i<this.lista_pacienti.size(); ++i) {
+            if (this.lista_pacienti.get(i).getUsername()== username) {
+                return this.lista_pacienti.get(i);
+            }
+        }
 
-    public Pacient cauta_pacient (){
-        return null;
+        throw new Exception("Pacient inexistent!");
     }
 
     public Vector<Pacient> get_all (){
-        return null;
+        return this.lista_pacienti;
     }
 
 }
