@@ -5,124 +5,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C7E4E8"
-    tools:context=".Inregistrare">
+    tools:context=".SetareMedic">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F6F1EB">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="730dp"
-                android:background="#C7E4E8"
-                tools:context=".SignIn">
+                android:layout_height="731dp">
 
                 <EditText
-                    android:id="@+id/editTextTextPassword3"
+                    android:id="@+id/editTextTextPersonName15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
-                    android:hint="Confirmare parola"
-                    android:inputType="textPassword"
+                    android:hint="Localitate"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName14" />
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="Adresa"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName13" />
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="Prenume"
+                    android:inputType="textPersonName"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName2"
+                    android:id="@+id/editTextTextPersonName12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
-                    android:hint="Nume utilizator"
+                    android:hint="Nume"
                     android:inputType="textPersonName"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/editTextTextPassword"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:ems="10"
-                    android:hint="Parola"
-                    android:inputType="textPassword"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2" />
-
-                <EditText
-                    android:id="@+id/editTextTextEmailAddress2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:ems="10"
-                    android:hint="E-mail"
-                    android:inputType="textEmailAddress"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
-
                 <Button
-                    android:id="@+id/sign_pacient"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="#A7A8AE"
-                    android:enabled="true"
-                    android:text="Inregistrare Pacient"
-                    android:textAllCaps="false"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
-
-                <Button
-                    android:id="@+id/inapoi_main_inregistrare"
+                    android:id="@+id/inapoi_inregistrare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:background="#A7A8AE"
                     android:text="Inapoi"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName15" />
 
                 <Button
-                    android:id="@+id/sign_medic"
+                    android:id="@+id/salvare_medic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:background="#A7A8AE"
-                    android:text="Inregistrare Medic"
-                    android:textAllCaps="false"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:text="Salvare"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sign_pacient" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName15" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
