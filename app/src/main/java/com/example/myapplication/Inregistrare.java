@@ -43,7 +43,6 @@ public class Inregistrare extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 if (sw.isChecked() == true) {
                     create_account_medic();
                     Intent intent = new Intent(Inregistrare.this, SetareMedic.class);
@@ -51,7 +50,6 @@ public class Inregistrare extends AppCompatActivity {
                 }
                 else{
                     Intent intent = new Intent(Inregistrare.this, SetareProfil.class);
-
                     startActivity(intent);
                 }
 

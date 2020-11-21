@@ -67,6 +67,7 @@ public class SetareProfil extends AppCompatActivity {
                         text.setText(sday + "/" + smonth + "/" + syear);
                     }
                 }, day, month, year);
+                datePick.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
                 datePick.show();
             }
         });
