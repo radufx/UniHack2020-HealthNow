@@ -26,7 +26,12 @@ public class repositoryMedic {
         if(!this.lista_medici.contains(medic)){
             throw new Exception("Medic inexistent!");
         }
-        this.lista_medici.remove(medic);
+        for (int i=0; i<this.lista_medici.size(); ++i){
+            if (this.lista_medici.get(i).equals(medic)){
+                this.lista_medici.remove(i);
+                return;
+            }
+        }
     }
     public void modifica_medic(Medic medic) throws Exception{
         if(!this.lista_medici.contains(medic)){

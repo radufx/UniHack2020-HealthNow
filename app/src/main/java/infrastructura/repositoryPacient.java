@@ -9,7 +9,7 @@ import domain.Pacient;
 public class repositoryPacient {
     private Vector<Pacient> lista_pacienti = new Vector<Pacient>();
 
-    public repositoryPacient(Vector<Pacient> lista_pacienti) {
+    public repositoryPacient() {
         this.lista_pacienti = lista_pacienti;
     }
 
@@ -20,7 +20,7 @@ public class repositoryPacient {
         this.lista_pacienti.add(pacient);
     }
 
-    public int size (){
+    public int size(){
         return this.lista_pacienti.size();
     }
 
@@ -28,7 +28,12 @@ public class repositoryPacient {
         if (!this.lista_pacienti.contains(pacient)){
             throw new Exception("Pacient inexistent!");
         }
-        this.lista_pacienti.remove(pacient);
+        for (int i=0; i<this.lista_pacienti.size(); ++i){
+            if (this.lista_pacienti.get(i).equals(pacient)){
+                this.lista_pacienti.remove(i);
+                return;
+            }
+        }
     }
 
     public void modifica_pacient(Pacient pacient) throws Exception {
