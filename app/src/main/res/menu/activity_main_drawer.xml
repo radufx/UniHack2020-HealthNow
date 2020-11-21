@@ -6,11 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_simptome"
-            android:icon="@drawable/disconnected"
+            android:icon="@drawable/iconsimptome"
             android:title="Simptome" />
         <item
             android:id="@+id/nav_setari"
-            android:icon="@drawable/disconnected"
+            android:icon="@drawable/iconsettings"
             android:title="Setari" />
         <item
             android:title="Deconectare"

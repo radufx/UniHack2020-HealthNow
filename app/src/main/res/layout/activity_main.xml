@@ -13,12 +13,12 @@
         android:layout_width="132dp"
         android:layout_height="65dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="140dp"
         android:background="#A7A8AE"
         android:text="Sign-in"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
     <Button
@@ -26,12 +26,12 @@
         android:layout_width="132dp"
         android:layout_height="65dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="140dp"
         android:background="#A7A8AE"
         android:text="Sign-up"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inscriere" />
 
     <EditText
