@@ -30,7 +30,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
-                    android:hint="Nume utilizator"
+                    android:hint="Adresa e-mail"
                     android:inputType="textPersonName"
                     android:textAlignment="center"
                     android:textSize="28sp"
