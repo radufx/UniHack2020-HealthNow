@@ -87,6 +87,11 @@ public class Inscriere extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            if (user.isEmailVerified() == false){
+                                Toast.makeText(Inscriere.this, "Autentificare esuata!\nAdresa de e-mail neverificata!\n",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                             Intent intent =  new Intent(Inscriere.this, PaginaStartMedic.class);
                             finishAffinity();
                             startActivity(intent);

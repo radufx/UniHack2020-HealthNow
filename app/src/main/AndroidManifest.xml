@@ -13,10 +13,6 @@
             android:label="@string/title_activity_pagina_start_medic"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.PaginaStartMedic"
-            android:label="@string/title_activity_pagina_start_medic"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".PaginaStartPacient"
             android:label="@string/title_activity_pagina_start_pacient"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -24,6 +20,7 @@
         <activity android:name=".SetareMedic" />
         <activity android:name=".SetareProfil" />
         <activity android:name=".Inregistrare" />
+        <activity android:name=".ConfirmareMail"/>
         <activity android:name=".Inscriere" />
         <activity android:name=".MainActivity">
             <intent-filter>

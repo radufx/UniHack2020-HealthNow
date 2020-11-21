@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -19,9 +20,11 @@ public class SetareProfil extends AppCompatActivity {
     private DatePickerDialog datePick;
     private TextView text;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_setare_profil);
 
         button1 = findViewById(R.id.inapoi_inregistrare);
@@ -41,6 +44,10 @@ public class SetareProfil extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SetareProfil.this, PaginaStartPacient.class);
+                if (!validate_input()){
+
+                    return;
+                }
                 finishAffinity();
                 startActivity(intent);
             }
@@ -71,6 +78,16 @@ public class SetareProfil extends AppCompatActivity {
                 datePick.show();
             }
         });
+    }
+
+    public boolean validate_input (){
+        boolean valid = true;
+
+        return valid;
+    }
+
+    public void displayToast (String mesaj){
+        Toast.makeText(SetareProfil.this, mesaj, Toast.LENGTH_LONG).show();
     }
 
 }
