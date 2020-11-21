@@ -8,6 +8,10 @@ public class Medic extends Object {
     private String username, parola, adresa, telefon, email, cnp, nume;
     private Vector<String> username_pacienti = new Vector<String>();
 
+    public Medic (){
+
+    }
+
     public Medic(String username, String parola, String adresa, String telefon, String email, String cnp,
                  String Prenume, String Nume) {
         this.username = username;

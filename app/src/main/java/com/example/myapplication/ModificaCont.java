@@ -44,8 +44,7 @@ public class ModificaCont extends AppCompatActivity {
                 modifica();
                 Toast.makeText(ModificaCont.this, "Parola schimbata cu succes!",
                         Toast.LENGTH_SHORT).show();
-                EditText txt = (EditText) ModificaCont.this.findViewById(R.id.editTextTextPassword4);
-                txt.setText("");
+                EditText txt;
                 txt = (EditText) ModificaCont.this.findViewById(R.id.editTextTextPassword5);
                 txt.setText("");
                 txt = (EditText) ModificaCont.this.findViewById(R.id.editTextTextPassword6);
@@ -67,9 +66,7 @@ public class ModificaCont extends AppCompatActivity {
     }
 
     public String valid (){
-        String parola;
-        EditText txt = (EditText) ModificaCont.this.findViewById(R.id.editTextTextPassword4);
-        parola_veche = txt.getText().toString();
+        EditText txt;
         txt = (EditText) ModificaCont.this.findViewById(R.id.editTextTextPassword5);
         parola_noua = txt.getText().toString();
         txt = (EditText) ModificaCont.this.findViewById(R.id.editTextTextPassword6);
