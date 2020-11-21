@@ -30,7 +30,7 @@ public class SimptomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
-
+        int a = 0;
         return root;
     }
 }
