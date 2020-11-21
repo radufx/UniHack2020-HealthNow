@@ -23,6 +23,8 @@ public class ConfirmareMail extends AppCompatActivity {
 
     private Button buton;
 
+    private boolean not_okay = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +36,11 @@ public class ConfirmareMail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendEmailVerification(mAuth.getCurrentUser());
-                mAuth.signOut();
-                Intent intent = new Intent(ConfirmareMail.this, MainActivity.class);
-                startActivity(intent);
+                if (not_okay != true) {
+                    mAuth.signOut();
+                    Intent intent = new Intent(ConfirmareMail.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -56,6 +60,7 @@ public class ConfirmareMail extends AppCompatActivity {
                     Toast.makeText(ConfirmareMail.this,
                             "Failed to send verification email.",
                             Toast.LENGTH_SHORT).show();
+                    not_okay = true;
                 }
             }
 
