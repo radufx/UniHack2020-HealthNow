@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,9 +23,13 @@ import validatori.validatorMedic;
 public class Inscriere extends AppCompatActivity {
     private Button button;
 
+    private TextView text_box;
+
     private FirebaseAuth mAuth;
 
     private static final String TAG = "EmailPassword";
+
+    private String password = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,16 @@ public class Inscriere extends AppCompatActivity {
         setContentView(R.layout.activity_inscriere);
 
         button = findViewById(R.id.inapoi_main_inscriere);
+
+        text_box = findViewById(R.id.textView2);
+
+        text_box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                password_reset();
+
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -63,6 +78,40 @@ public class Inscriere extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
+    public String getPassword(){
+        return this.password;
+    }
+
+    private void password_reset (){
+        EditText txt = (EditText)Inscriere.this.findViewById(R.id.editTextTextPersonName);
+        String email = txt.getText().toString();
+        validatorMedic validator = new validatorMedic();
+        String errors = validator.valid_emaill(email);
+
+        if (errors.length() > 0){
+            Toast.makeText(Inscriere.this, errors,
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Inscriere.this, "Email sent.",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else{
+                            Toast.makeText(Inscriere.this, "Email could not be sent.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+
     private void sign_in() {
         EditText txt = (EditText)Inscriere.this.findViewById(R.id.editTextTextPersonName);
         String email = txt.getText().toString();
@@ -87,6 +136,7 @@ public class Inscriere extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
                             if (user.isEmailVerified() == false){
                                 Toast.makeText(Inscriere.this, "Autentificare esuata!\nAdresa de e-mail neverificata!\n",
                                         Toast.LENGTH_SHORT).show();

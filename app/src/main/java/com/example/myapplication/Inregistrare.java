@@ -41,14 +41,6 @@ public class Inregistrare extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 success = true;
-                boolean stare = create_account();
-                if (!stare) {
-
-                    return;
-                }
-                Intent intent = new Intent(Inregistrare.this, ConfirmareMail.class);
-                startActivity(intent);
-                finishAffinity();
                 if (sw.isChecked() == true) {
                     /*intent = new Intent(Inregistrare.this, SetareMedic.class);
                     startActivity(intent);*/
@@ -57,6 +49,8 @@ public class Inregistrare extends AppCompatActivity {
                     /*intent = new Intent(Inregistrare.this, SetareProfil.class);
                     startActivity(intent);*/
                 }
+                create_account();
+
 
             }
         });
@@ -80,7 +74,7 @@ public class Inregistrare extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
-    private boolean create_account() {
+    private void create_account() {
 
 
         EditText txt = (EditText) Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);
@@ -96,7 +90,7 @@ public class Inregistrare extends AppCompatActivity {
 
         if (erori.length() > 0) {
             displayToast(erori);
-            return false;
+            return;
         }
 
         mAuth.createUserWithEmailAndPassword(email, parola)
@@ -106,23 +100,21 @@ public class Inregistrare extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Intent intent = new Intent(Inregistrare.this, ConfirmareMail.class);
+                            startActivity(intent);
+                            finishAffinity();
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(Inregistrare.this, "Adresa de e-mail deja existenta.",
                                     Toast.LENGTH_SHORT).show();
                             EditText txt = (EditText) Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);
                             txt.setText("");
-                            success = false;
-                            Log.w(TAG, "createUserWithEmail:failure" + success.toString());
-                            return;
                         }
                     }
                 });
-        return success;
     }
 
     private String valid_input (){
-        boolean valid = true;
 
         EditText txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);
         String email = txt.getText().toString();

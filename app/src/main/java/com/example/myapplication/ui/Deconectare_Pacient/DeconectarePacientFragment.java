@@ -16,10 +16,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DeconectarePacientFragment extends Fragment {
 
     private DeconectarePacientViewModel homeViewModel;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class DeconectarePacientFragment extends Fragment {
         deconectare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth.signOut();
                 Intent in = new Intent(getActivity(), MainActivity.class);
                 getActivity().finishAffinity();
                 startActivity(in);

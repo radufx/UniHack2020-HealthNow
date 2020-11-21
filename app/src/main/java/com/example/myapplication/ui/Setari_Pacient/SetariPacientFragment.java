@@ -17,10 +17,13 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.ModificaCont;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SetariPacientFragment extends Fragment {
 
     private SetariPacientViewModel galleryViewModel;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class SetariPacientFragment extends Fragment {
         stergere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                user.delete();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 getActivity().finishAffinity();
                 startActivity(intent);
