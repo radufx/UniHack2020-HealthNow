@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_setari"
-        android:name="com.example.myapplication.ui.Setari.SetariFragment"
+        android:name="com.example.myapplication.ui.Setari_Pacient.SetariFragment"
         android:label="Setari"
-        tools:layout="@layout/fragment_setari" />
+        tools:layout="@layout/fragment_setari_pacient" />
 
     <fragment
         android:id="@+id/nav_deconectare"
-        android:name="com.example.myapplication.ui.Deconectare.DeconectareFragment"
+        android:name="com.example.myapplication.ui.Deconectare_Pacient.DeconectarePacientFragment"
         android:label="Deconectare"
-        tools:layout="@layout/fragment_deconectare" />
+        tools:layout="@layout/fragment_deconectare_pacient" />
 </navigation>

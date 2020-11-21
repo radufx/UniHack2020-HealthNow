@@ -4,15 +4,21 @@
 
     <application
         android:allowBackup="true"
-
         android:label="@string/app_name"
-
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PaginaStartMedic"
+            android:label="@string/title_activity_pagina_start_medic"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.PaginaStartMedic"
+            android:label="@string/title_activity_pagina_start_medic"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".PaginaStartPacient"
             android:label="@string/title_activity_pagina_start_pacient"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AdaugareSimptome" />
         <activity android:name=".SetareMedic" />
         <activity android:name=".SetareProfil" />

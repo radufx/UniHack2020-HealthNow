@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.Setari;
+package com.example.myapplication.ui.Deconectare_Medic;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,18 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
 
-public class SetariFragment extends Fragment {
+public class DeconectareMedicFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private DeconectareMedicViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_setari, container, false);
-        final TextView textView = root.findViewById(R.id.text_setari);
-
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        homeViewModel =
+                ViewModelProviders.of(this).get(DeconectareMedicViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_deconectare_medic, container, false);
+        final TextView textView = root.findViewById(R.id.text_home);
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

@@ -24,5 +24,15 @@ public class SetareMedic extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        button = findViewById(R.id.salvare_medic);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SetareMedic.this, PaginaStartMedic.class);
+                startActivity(intent);
+            }
+        });
     }
 }

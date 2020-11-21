@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.Simptome;
+package com.example.myapplication.ui.Pacienti;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,16 +14,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
 
-public class SimptomeFragment extends Fragment {
+public class PacientiFragment extends Fragment {
 
-    private SimptomeViewModel homeViewModel;
+    private PacientiViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
-                ViewModelProviders.of(this).get(SimptomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_simptome, container, false);
-        final TextView textView = root.findViewById(R.id.text_simptome);
+                ViewModelProviders.of(this).get(PacientiViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_pacienti, container, false);
+        final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

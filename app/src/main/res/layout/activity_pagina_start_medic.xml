@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_main_pacient"
+        layout="@layout/app_bar_main_medic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#C7E4E8" />
@@ -21,6 +21,6 @@
         android:layout_gravity="start"
         android:background="#C7E4E8"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main_pacient"
-        app:menu="@menu/activity_main_drawer_pacient" />
+        app:headerLayout="@layout/nav_header_main_medic"
+        app:menu="@menu/activity_main_drawer_medic" />
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_pacienti">
+
+    <fragment
+        android:id="@+id/nav_pacienti"
+        android:name="com.example.myapplication.ui.Pacienti.PacientiFragment"
+        android:label="Pacienti"
+        tools:layout="@layout/fragment_pacienti" />
+
+    <fragment
+        android:id="@+id/nav_setari"
+        android:name="com.example.myapplication.ui.Setari_Medic.SetariMedicFragment"
+        android:label="Setari"
+        tools:layout="@layout/fragment_setari_medic" />
+
+    <fragment
+        android:id="@+id/nav_deconectare"
+        android:name="com.example.myapplication.ui.Deconectare_Medic.DeconectareMedicFragment"
+        android:label="Deconectare"
+        tools:layout="@layout/fragment_deconectare_medic" />
+</navigation>

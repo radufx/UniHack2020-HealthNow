@@ -15,7 +15,7 @@ public class Inregistrare extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inregistrare);
 
-        button = findViewById(R.id.sign_medic);
+        button = findViewById(R.id.sign_medic_inregistrare);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,7 +26,7 @@ public class Inregistrare extends AppCompatActivity {
             }
         });
 
-        button = findViewById(R.id.sign_pacient);
+        button = findViewById(R.id.sign_pacient_inregistrare);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

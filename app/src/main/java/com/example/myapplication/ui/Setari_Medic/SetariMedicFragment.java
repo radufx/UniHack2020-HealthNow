@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.Simptome;
+package com.example.myapplication.ui.Setari_Medic;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
 
-public class SimptomeFragment extends Fragment {
+public class SetariMedicFragment extends Fragment {
 
-    private SimptomeViewModel homeViewModel;
+    private SetariMedicViewModel galleryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(SimptomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_simptome, container, false);
-        final TextView textView = root.findViewById(R.id.text_simptome);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        galleryViewModel =
+                ViewModelProviders.of(this).get(SetariMedicViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_setari_medic, container, false);
+        final TextView textView = root.findViewById(R.id.text_gallery);
+        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

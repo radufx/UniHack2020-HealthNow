@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_simptome"
+            android:icon="@drawable/iconsimptome"
+            android:title="Simptome" />
+        <item
+            android:id="@+id/nav_setari"
+            android:icon="@drawable/iconsettings"
+            android:title="Setari" />
+        <item
+            android:id="@+id/nav_deconectare"
+            android:icon="@drawable/disconnected"
+            android:title="Deconectare"
+        />
+    </group>
+</menu>
