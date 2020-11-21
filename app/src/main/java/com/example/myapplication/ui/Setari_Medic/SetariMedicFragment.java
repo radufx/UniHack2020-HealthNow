@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.MainActivity;
+import com.example.myapplication.ModificaCont;
 import com.example.myapplication.R;
 
 public class SetariMedicFragment extends Fragment {
@@ -26,26 +27,29 @@ public class SetariMedicFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_setari_medic, container, false);
+
         Button setari_cont = (Button) view.findViewById(R.id.setari_cont2);
+
         setari_cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), ModificaCont.class);
                 getActivity().finishAffinity();
-                startActivity(in);
+                startActivity(intent);
             }
         });
 
-        view = inflater.inflate(R.layout.fragment_setari_medic, container, false);
         Button stergere_cont = (Button) view.findViewById(R.id.stergere_cont2);
+
         stergere_cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 getActivity().finishAffinity();
-                startActivity(in);
+                startActivity(intent);
             }
         });
+
         return view;
 
     }

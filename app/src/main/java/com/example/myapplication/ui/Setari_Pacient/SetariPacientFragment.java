@@ -15,9 +15,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.MainActivity;
+import com.example.myapplication.ModificaCont;
 import com.example.myapplication.R;
 
-public class SetariFragment extends Fragment {
+public class SetariPacientFragment extends Fragment {
 
     private SetariPacientViewModel galleryViewModel;
 
@@ -30,9 +31,9 @@ public class SetariFragment extends Fragment {
         setari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), ModificaCont.class);
                 getActivity().finishAffinity();
-                startActivity(in);
+                startActivity(intent);
             }
         });
 
@@ -41,9 +42,9 @@ public class SetariFragment extends Fragment {
         stergere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 getActivity().finishAffinity();
-                startActivity(in);
+                startActivity(intent);
             }
         });
         return view;
