@@ -1,0 +1,127 @@
+Index: app/src/main/java/infrastructura/repositoryPacient.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package infrastructura;\r\n\r\nimport androidx.annotation.Nullable;\r\n\r\nimport java.util.Vector;\r\n\r\nimport domain.Pacient;\r\n\r\npublic class repositoryPacient {\r\n    private Vector<Pacient> lista_pacienti = new Vector<Pacient>();\r\n\r\n    public repositoryPacient(Vector<Pacient> lista_pacienti) {\r\n        this.lista_pacienti = lista_pacienti;\r\n    }\r\n\r\n    public void adauga_pacient (Pacient pacient) throws Exception {\r\n        if (this.lista_pacienti.contains(pacient)){\r\n            throw new Exception(\"Element deja existent\");\r\n        }\r\n    }\r\n\r\n    public int size (){\r\n        return 0;\r\n    }\r\n\r\n    public void sterge_pacient(){\r\n\r\n    }\r\n\r\n    public void modifica_pacient(){\r\n\r\n    }\r\n\r\n    public Pacient cauta_pacient (){\r\n        return null;\r\n    }\r\n\r\n    public Vector<Pacient> get_all (){\r\n        return null;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/infrastructura/repositoryPacient.java	(revision 283cf262e72d6ee4dd4f46ef2a77a4ccef25615b)
++++ app/src/main/java/infrastructura/repositoryPacient.java	(date 1605912093601)
+@@ -15,28 +15,45 @@
+ 
+     public void adauga_pacient (Pacient pacient) throws Exception {
+         if (this.lista_pacienti.contains(pacient)){
+-            throw new Exception("Element deja existent");
++            throw new Exception("Pacient deja existent!");
+         }
++        this.lista_pacienti.add(pacient);
+     }
+ 
+     public int size (){
+-        return 0;
++        return this.lista_pacienti.size();
++    }
++
++    public void sterge_pacient (Pacient pacient) throws Exception  {
++        if (!this.lista_pacienti.contains(pacient)){
++            throw new Exception("Pacient inexistent!");
++        }
++        this.lista_pacienti.remove(pacient);
+     }
+ 
+-    public void sterge_pacient(){
++    public void modifica_pacient(Pacient pacient) throws Exception {
++        if (!this.lista_pacienti.contains(pacient)){
++            throw new Exception("Pacient inexistent!");
++        }
++        for (int i=0; i<this.lista_pacienti.size(); ++i){
++            if (this.lista_pacienti.get(i).equals(pacient) ) this.lista_pacienti.set(i, pacient);
++        }
+ 
+     }
+ 
+-    public void modifica_pacient(){
++    public Pacient cauta_pacient (String username) throws Exception {
+ 
+-    }
++        for (int i=0; i<this.lista_pacienti.size(); ++i) {
++            if (this.lista_pacienti.get(i).getUsername()== username) {
++                return this.lista_pacienti.get(i);
++            }
++        }
+ 
+-    public Pacient cauta_pacient (){
+-        return null;
++        throw new Exception("Pacient inexistent!");
+     }
+ 
+     public Vector<Pacient> get_all (){
+-        return null;
++        return this.lista_pacienti;
+     }
+ 
+ }
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision 283cf262e72d6ee4dd4f46ef2a77a4ccef25615b)
++++ .idea/gradle.xml	(date 1605910396658)
+@@ -15,6 +15,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1605910396638)
++++ .idea/vcs.xml	(date 1605910396638)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 283cf262e72d6ee4dd4f46ef2a77a4ccef25615b)
++++ .idea/misc.xml	(date 1605910396627)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1605910396644)
++++ .idea/compiler.xml	(date 1605910396644)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file

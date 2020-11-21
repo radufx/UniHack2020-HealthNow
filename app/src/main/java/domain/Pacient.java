@@ -7,13 +7,13 @@ import java.util.Vector;
 
 public class Pacient extends Object{
     private String username, parola, email, telefon, adresa, cnp;
-    private String username_medic;
+    private String username_medic = "";
     private Date data_nasterii;
 
     private Vector<ConditieMedicala> conditii_medicale = new Vector<ConditieMedicala>();
 
 
-    public void pacient(String username, String parola, String email,
+    public Pacient(String username, String parola, String email,
                         String telefon, String adresa, String cnp, Date data_nasterii) {
         this.username = username;
         this.parola = parola;
@@ -103,6 +103,6 @@ public class Pacient extends Object{
     @Override
     public boolean equals(@Nullable Object other) {
         Pacient alt_pacient = (Pacient)other;
-        return super.equals(this.username == alt_pacient.username);
+        return this.username == alt_pacient.username;
     }
 }

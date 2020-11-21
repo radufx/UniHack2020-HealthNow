@@ -9,34 +9,56 @@ import domain.Pacient;
 public class repositoryPacient {
     private Vector<Pacient> lista_pacienti = new Vector<Pacient>();
 
-    public repositoryPacient(Vector<Pacient> lista_pacienti) {
+    public repositoryPacient() {
         this.lista_pacienti = lista_pacienti;
     }
 
     public void adauga_pacient (Pacient pacient) throws Exception {
         if (this.lista_pacienti.contains(pacient)){
-            throw new Exception("Element deja existent");
+            throw new Exception("Pacient deja existent!");
+        }
+        this.lista_pacienti.add(pacient);
+    }
+
+    public int size(){
+        return this.lista_pacienti.size();
+    }
+
+    public void sterge_pacient (Pacient pacient) throws Exception  {
+        if (!this.lista_pacienti.contains(pacient)){
+            throw new Exception("Pacient inexistent!");
+        }
+        for (int i=0; i<this.lista_pacienti.size(); ++i){
+            if (this.lista_pacienti.get(i).equals(pacient)){
+                this.lista_pacienti.remove(i);
+                return;
+            }
         }
     }
 
-    public int size (){
-        return 0;
-    }
-
-    public void sterge_pacient(){
-
-    }
-
-    public void modifica_pacient(){
+    public void modifica_pacient(Pacient pacient) throws Exception {
+        if (!this.lista_pacienti.contains(pacient)){
+            throw new Exception("Pacient inexistent!");
+        }
+        for (int i=0; i<this.lista_pacienti.size(); ++i){
+            if (this.lista_pacienti.get(i).equals(pacient) ) this.lista_pacienti.set(i, pacient);
+        }
 
     }
 
-    public Pacient cauta_pacient (){
-        return null;
+    public Pacient cauta_pacient (String username) throws Exception {
+
+        for (int i=0; i<this.lista_pacienti.size(); ++i) {
+            if (this.lista_pacienti.get(i).getUsername()== username) {
+                return this.lista_pacienti.get(i);
+            }
+        }
+
+        throw new Exception("Pacient inexistent!");
     }
 
     public Vector<Pacient> get_all (){
-        return null;
+        return this.lista_pacienti;
     }
 
 }

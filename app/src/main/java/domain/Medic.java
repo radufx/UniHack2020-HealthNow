@@ -79,6 +79,10 @@ public class Medic extends Object {
         this.username_pacienti.remove(username_pacient);
     }
 
+    public ConditieMedicala get_conditie_medicala (int indice){
+        return conditii_medicale.get(indice);
+    }
+
     public void add_conditie_medicala (ConditieMedicala conditie_medicala){
         this.conditii_medicale.add(conditie_medicala);
     }
@@ -90,6 +94,6 @@ public class Medic extends Object {
     @Override
     public boolean equals(@Nullable Object obj) {
         Medic alt_medic = (Medic)obj;
-        return super.equals(this.username.equals(alt_medic.username));
+        return this.username == alt_medic.username;
     }
 }
