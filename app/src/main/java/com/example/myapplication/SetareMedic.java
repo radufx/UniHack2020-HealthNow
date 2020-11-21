@@ -24,6 +24,5 @@ public class SetareMedic extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }

@@ -65,15 +65,16 @@
 
                 <EditText
                     android:id="@+id/editTextDate"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:clickable="false"
+                    android:editable="false"
                     android:ems="10"
+                    android:enabled="false"
                     android:hint="Data nasterii"
                     android:inputType="date"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
 
@@ -116,6 +117,15 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName11" />
+
+                <Button
+                    android:id="@+id/alege"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Alege"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

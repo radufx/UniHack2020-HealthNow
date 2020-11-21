@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Inscriere.class);
+                finish();
                 startActivity(intent);
+
             }
         });
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Inregistrare.class);
+                finish();
                 startActivity(intent);
             }
         });

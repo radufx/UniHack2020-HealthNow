@@ -26,5 +26,15 @@ public class Inscriere extends AppCompatActivity {
                 }
         });
 
+        button = findViewById(R.id.log_pacient);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Inscriere.this, PaginaStartPacient.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
