@@ -7,7 +7,7 @@ import java.util.Vector;
 
 public class Pacient extends Object{
     private String username, parola, email, telefon, adresa, cnp;
-    private String username_medic;
+    private String username_medic = "";
     private Date data_nasterii;
 
     private Vector<ConditieMedicala> conditii_medicale = new Vector<ConditieMedicala>();

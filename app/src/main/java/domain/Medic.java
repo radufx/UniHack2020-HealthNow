@@ -79,6 +79,10 @@ public class Medic extends Object {
         this.username_pacienti.remove(username_pacient);
     }
 
+    public ConditieMedicala get_conditie_medicala (int indice){
+        return conditii_medicale.get(indice);
+    }
+
     public void add_conditie_medicala (ConditieMedicala conditie_medicala){
         this.conditii_medicale.add(conditie_medicala);
     }

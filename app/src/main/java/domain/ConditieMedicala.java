@@ -4,12 +4,11 @@ public class ConditieMedicala extends Object {
     private String username_pacient, username_medic, descriere, tratament;
     private int id;
 
-    public ConditieMedicala(String username_pacient, String username_medic, String descriere, String tratament, int id) {
+    public ConditieMedicala(String username_pacient, String username_medic, String descriere, String tratament) {
         this.username_pacient = username_pacient;
         this.username_medic = username_medic;
         this.descriere = descriere;
         this.tratament = tratament;
-        this.id = id;
     }
 
     public String getUsername_pacient() {
@@ -42,10 +41,6 @@ public class ConditieMedicala extends Object {
 
     public void setTratament(String tratament) {
         this.tratament = tratament;
-    }
-
-    public int getId() {
-        return id;
     }
 
 }
