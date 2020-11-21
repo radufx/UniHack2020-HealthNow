@@ -1,0 +1,190 @@
+Index: app/src/main/java/com/example/myapplication/Inregistrare.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Switch;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.android.material.snackbar.Snackbar;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\n\r\nimport java.text.BreakIterator;\r\n\r\nimport validatori.validatorMedic;\r\n\r\npublic class Inregistrare extends AppCompatActivity {\r\n    private Button button;\r\n    private Switch sw;\r\n    private FirebaseAuth mAuth;\r\n\r\n    private static final String TAG = \"EmailPassword\";\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_inregistrare);\r\n\r\n        button = findViewById(R.id.sign_inregistrare);\r\n        sw = findViewById(R.id.sw_pacient_medic);\r\n\r\n        button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n\r\n\r\n                if (sw.isChecked() == true) {\r\n                    create_account_medic();\r\n                    Intent intent = new Intent(Inregistrare.this, SetareMedic.class);\r\n                    startActivity(intent);\r\n                }\r\n                else{\r\n                    Intent intent = new Intent(Inregistrare.this, SetareProfil.class);\r\n\r\n                    startActivity(intent);\r\n                }\r\n\r\n            }\r\n        });\r\n\r\n\r\n        button = findViewById(R.id.inapoi_main_inregistrare);\r\n\r\n        button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(Inregistrare.this, MainActivity.class);\r\n                finishAffinity();\r\n                startActivity(intent);\r\n            }\r\n        });\r\n        mAuth = FirebaseAuth.getInstance();\r\n\r\n    }\r\n\r\n    public void onStart (){\r\n        super.onStart();\r\n        FirebaseUser currentUser = mAuth.getCurrentUser();\r\n    }\r\n\r\n    private void create_account_medic (){\r\n        EditText txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);\r\n        String email = txt.getText().toString();\r\n        txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextPassword);\r\n        String parola = txt.getText().toString();\r\n\r\n\r\n        Log.d(TAG, \"createAccount:\" + email);\r\n\r\n        String erori = valid_input();\r\n\r\n        if (erori.length() > 0){\r\n            displayToast(erori);\r\n            return;\r\n        }\r\n\r\n        mAuth.createUserWithEmailAndPassword(email, parola)\r\n                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<AuthResult> task) {\r\n                        if (task.isSuccessful()) {\r\n                            // Sign in success, update UI with the signed-in user's information\r\n                            Log.d(TAG, \"createUserWithEmail:success\");\r\n                            FirebaseUser user = mAuth.getCurrentUser();\r\n                            //updateUI(user);\r\n                        } else {\r\n                            // If sign in fails, display a message to the user.\r\n                            Log.w(TAG, \"createUserWithEmail:failure\", task.getException());\r\n                            Toast.makeText(Inregistrare.this, \"Adresa de e-mail deja existenta.\",\r\n                                    Toast.LENGTH_SHORT).show();\r\n                            EditText txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);\r\n                            txt.setText(\"\");\r\n                            return;\r\n                            //updateUI(null);\r\n                        }\r\n\r\n                        // ...\r\n                    }\r\n                });\r\n\r\n        Intent intent = new Intent(Inregistrare.this, SetareMedic.class);\r\n        startActivity(intent);\r\n\r\n\r\n    }\r\n\r\n    private void create_account_pacient (String email, String parola){\r\n\r\n    }\r\n\r\n    private String valid_input (){\r\n        boolean valid = true;\r\n\r\n        EditText txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);\r\n        String email = txt.getText().toString();\r\n        txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextPassword3);\r\n        String confirmare_parola = txt.getText().toString();\r\n        txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextPassword);\r\n        String parola = txt.getText().toString();\r\n        txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextPersonName2);\r\n        String username = txt.getText().toString();\r\n\r\n        validatorMedic validator = new validatorMedic();\r\n        String errors = \"\";\r\n        errors += validator.valid_usernamee(username);\r\n        errors += validator.valid_emaill(email);\r\n        errors += validator.valid_parolaa(parola);\r\n\r\n        if (!parola.equals(confirmare_parola)) errors += \"Parolele nu coincid!\\n\";\r\n\r\n        return errors;\r\n    }\r\n\r\n\r\n    public void displayToast (String mesaj){\r\n        Toast.makeText(Inregistrare.this, mesaj, Toast.LENGTH_LONG).show();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myapplication/Inregistrare.java	(revision 14f0306336a9cb7bc2324f224bc17800ed6ea8c5)
++++ app/src/main/java/com/example/myapplication/Inregistrare.java	(date 1605982849491)
+@@ -13,6 +13,7 @@
+ import android.widget.Switch;
+ import android.widget.Toast;
+ 
++import com.example.myapplication.ui.ConfirmareMail;
+ import com.google.android.gms.tasks.OnCompleteListener;
+ import com.google.android.gms.tasks.Task;
+ import com.google.android.material.snackbar.Snackbar;
+@@ -39,19 +40,19 @@
+         button = findViewById(R.id.sign_inregistrare);
+         sw = findViewById(R.id.sw_pacient_medic);
+ 
++
+         button.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+-
+-
++                create_account();
++                Intent intent = new Intent(Inregistrare.this, ConfirmareMail.class);
++                startActivity(intent);
+                 if (sw.isChecked() == true) {
+-                    create_account_medic();
+-                    Intent intent = new Intent(Inregistrare.this, SetareMedic.class);
++                    intent = new Intent(Inregistrare.this, SetareMedic.class);
+                     startActivity(intent);
+                 }
+                 else{
+-                    Intent intent = new Intent(Inregistrare.this, SetareProfil.class);
+-
++                    intent = new Intent(Inregistrare.this, SetareProfil.class);
+                     startActivity(intent);
+                 }
+ 
+@@ -78,7 +79,7 @@
+         FirebaseUser currentUser = mAuth.getCurrentUser();
+     }
+ 
+-    private void create_account_medic (){
++    private void create_account(){
+         EditText txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);
+         String email = txt.getText().toString();
+         txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextPassword);
+@@ -124,10 +125,6 @@
+ 
+     }
+ 
+-    private void create_account_pacient (String email, String parola){
+-
+-    }
+-
+     private String valid_input (){
+         boolean valid = true;
+ 
+Index: app/src/main/java/com/example/myapplication/SetareMedic.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\npublic class SetareMedic extends AppCompatActivity {\r\n    private Button button;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_setare_medic);\r\n\r\n        button = findViewById(R.id.inapoi_inregistrare);\r\n\r\n        button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(SetareMedic.this, Inregistrare.class);\r\n                finish();\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        button = findViewById(R.id.salvare_medic);\r\n\r\n        button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(SetareMedic.this, PaginaStartMedic.class);\r\n                finishAffinity();\r\n                startActivity(intent);\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myapplication/SetareMedic.java	(revision 14f0306336a9cb7bc2324f224bc17800ed6ea8c5)
++++ app/src/main/java/com/example/myapplication/SetareMedic.java	(date 1605981702666)
+@@ -6,6 +6,7 @@
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.Button;
++import android.widget.Toast;
+ 
+ public class SetareMedic extends AppCompatActivity {
+     private Button button;
+@@ -21,6 +22,10 @@
+             @Override
+             public void onClick(View view) {
+                 Intent intent = new Intent(SetareMedic.this, Inregistrare.class);
++                if (!validate_input()){
++
++                    return;
++                }
+                 finish();
+                 startActivity(intent);
+             }
+@@ -37,4 +42,14 @@
+             }
+         });
+     }
++
++    public boolean validate_input (){
++        boolean valid = true;
++
++        return valid;
++    }
++
++    public void displayToast (String mesaj) {
++        Toast.makeText(SetareMedic.this, mesaj, Toast.LENGTH_LONG).show();
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapplication/SetareProfil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.app.Activity;\r\nimport android.app.DatePickerDialog;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.DatePicker;\r\nimport android.widget.TextView;\r\n\r\nimport java.util.Calendar;\r\n\r\npublic class SetareProfil extends AppCompatActivity {\r\n    private Button button1;\r\n    private Calendar calendar;\r\n    private DatePickerDialog datePick;\r\n    private TextView text;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_setare_profil);\r\n\r\n        button1 = findViewById(R.id.inapoi_inregistrare);\r\n\r\n        button1.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(SetareProfil.this, Inregistrare.class);\r\n                finish();\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        button1 = findViewById(R.id.salvare_profil);\r\n\r\n        button1.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(SetareProfil.this, PaginaStartPacient.class);\r\n                finishAffinity();\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        button1 = findViewById(R.id.alege);\r\n        text = findViewById(R.id.editTextDate);\r\n\r\n        button1.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                calendar = Calendar.getInstance();\r\n                int day = calendar.get(Calendar.DAY_OF_MONTH);\r\n                int month = calendar.get(Calendar.MONTH);\r\n                int year = calendar.get(Calendar.YEAR);\r\n\r\n\r\n                datePick = new DatePickerDialog(SetareProfil.this, new DatePickerDialog.OnDateSetListener() {\r\n                    @Override\r\n                    public void onDateSet(DatePicker datePicker, int pyear, int pmonth, int pday) {\r\n                        String sday = Integer.toString(pday);\r\n                        String smonth = Integer.toString(pmonth+1);\r\n                        String syear = Integer.toString(pyear);\r\n                        text.setText(sday + \"/\" + smonth + \"/\" + syear);\r\n                    }\r\n                }, day, month, year);\r\n                datePick.show();\r\n            }\r\n        });\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myapplication/SetareProfil.java	(revision 14f0306336a9cb7bc2324f224bc17800ed6ea8c5)
++++ app/src/main/java/com/example/myapplication/SetareProfil.java	(date 1605981702657)
+@@ -10,6 +10,7 @@
+ import android.widget.Button;
+ import android.widget.DatePicker;
+ import android.widget.TextView;
++import android.widget.Toast;
+ 
+ import java.util.Calendar;
+ 
+@@ -19,9 +20,11 @@
+     private DatePickerDialog datePick;
+     private TextView text;
+ 
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
++
+         setContentView(R.layout.activity_setare_profil);
+ 
+         button1 = findViewById(R.id.inapoi_inregistrare);
+@@ -41,6 +44,10 @@
+             @Override
+             public void onClick(View view) {
+                 Intent intent = new Intent(SetareProfil.this, PaginaStartPacient.class);
++                if (!validate_input()){
++
++                    return;
++                }
+                 finishAffinity();
+                 startActivity(intent);
+             }
+@@ -72,4 +79,14 @@
+         });
+     }
+ 
++    public boolean validate_input (){
++        boolean valid = true;
++
++        return valid;
++    }
++
++    public void displayToast (String mesaj){
++        Toast.makeText(SetareProfil.this, mesaj, Toast.LENGTH_LONG).show();
++    }
++
+ }
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.example.myapplication\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:label=\"@string/app_name\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n        <activity\r\n            android:name=\".PaginaStartMedic\"\r\n            android:label=\"@string/title_activity_pagina_start_medic\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\"></activity>\r\n        <activity\r\n            android:name=\".ui.PaginaStartMedic\"\r\n            android:label=\"@string/title_activity_pagina_start_medic\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\"></activity>\r\n        <activity\r\n            android:name=\".PaginaStartPacient\"\r\n            android:label=\"@string/title_activity_pagina_start_pacient\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\" />\r\n        <activity android:name=\".AdaugareSimptome\" />\r\n        <activity android:name=\".SetareMedic\" />\r\n        <activity android:name=\".SetareProfil\" />\r\n        <activity android:name=\".Inregistrare\" />\r\n        <activity android:name=\".Inscriere\" />\r\n        <activity android:name=\".MainActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 14f0306336a9cb7bc2324f224bc17800ed6ea8c5)
++++ app/src/main/AndroidManifest.xml	(date 1605982391422)
+@@ -7,14 +7,15 @@
+         android:label="@string/app_name"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
++        <activity android:name=".ui.ConfirmareMail"></activity>
+         <activity
+             android:name=".PaginaStartMedic"
+             android:label="@string/title_activity_pagina_start_medic"
+-            android:theme="@style/AppTheme.NoActionBar"></activity>
++            android:theme="@style/AppTheme.NoActionBar" />
+         <activity
+             android:name=".ui.PaginaStartMedic"
+             android:label="@string/title_activity_pagina_start_medic"
+-            android:theme="@style/AppTheme.NoActionBar"></activity>
++            android:theme="@style/AppTheme.NoActionBar" />
+         <activity
+             android:name=".PaginaStartPacient"
+             android:label="@string/title_activity_pagina_start_pacient"
