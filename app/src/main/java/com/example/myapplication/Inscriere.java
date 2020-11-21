@@ -32,7 +32,7 @@ public class Inscriere extends AppCompatActivity {
                 }
         });
 
-        button = findViewById(R.id.log_pacient);
+        /*button = findViewById(R.id.log_pacient);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,9 +41,9 @@ public class Inscriere extends AppCompatActivity {
                 finishAffinity();
                 startActivity(intent);
             }
-        });
+        });*/
 
-        button = findViewById(R.id.log_medic);
+        button = findViewById(R.id.log_medic_pacient);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

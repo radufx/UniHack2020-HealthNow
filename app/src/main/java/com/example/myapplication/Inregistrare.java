@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +26,7 @@ import validatori.validatorMedic;
 
 public class Inregistrare extends AppCompatActivity {
     private Button button;
-
+    private Switch sw;
     private FirebaseAuth mAuth;
 
     private static final String TAG = "EmailPassword";
@@ -35,30 +36,28 @@ public class Inregistrare extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inregistrare);
 
-        button = findViewById(R.id.sign_medic_inregistrare);
+        button = findViewById(R.id.sign_inregistrare);
+        sw = findViewById(R.id.sw_pacient_medic);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                create_account_medic();
 
-                Intent intent = new Intent(Inregistrare.this, SetareMedic.class);
-                startActivity(intent);
+                if (sw.isChecked() == true) {
+                    create_account_medic();
+                    Intent intent = new Intent(Inregistrare.this, SetareMedic.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(Inregistrare.this, SetareProfil.class);
+
+                    startActivity(intent);
+                }
 
             }
         });
 
-        button = findViewById(R.id.sign_pacient_inregistrare);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Inregistrare.this, SetareProfil.class);
-
-                startActivity(intent);
-            }
-        });
 
         button = findViewById(R.id.inapoi_main_inregistrare);
 

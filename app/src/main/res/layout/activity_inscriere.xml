@@ -55,46 +55,40 @@
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
                 <Button
-                    android:id="@+id/log_pacient"
-                    android:layout_width="160dp"
-                    android:layout_height="75dp"
-                    android:layout_marginTop="44dp"
-                    android:background="#A7A8AE"
-                    android:text="Inscriere pacient"
+                    android:id="@+id/inapoi_main_inscriere"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/buton_inapoi"
+                    android:shadowColor="#70737A"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"
+                    android:text="Inapoi"
                     android:textAllCaps="false"
-                    android:textSize="60px"
-                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/log_medic_pacient" />
+
+                <Button
+                    android:id="@+id/log_medic_pacient"
+                    android:layout_width="270dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/buton"
+                    android:shadowColor="#7A0A0A"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"
+                    android:text="Inscriere"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
-
-                <Button
-                    android:id="@+id/inapoi_main_inscriere"
-                    android:layout_width="120dp"
-                    android:layout_height="65dp"
-                    android:layout_marginTop="60dp"
-                    android:background="#A7A8AE"
-                    android:text="Inapoi"
-                    android:textAllCaps="false"
-                    android:textSize="50px"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/log_medic" />
-
-                <Button
-                    android:id="@+id/log_medic"
-                    android:layout_width="160dp"
-                    android:layout_height="75dp"
-                    android:layout_marginTop="50dp"
-                    android:background="#A7A8AE"
-                    android:text="Inscriere medic"
-                    android:textAllCaps="false"
-                    android:textSize="60px"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/log_pacient" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
