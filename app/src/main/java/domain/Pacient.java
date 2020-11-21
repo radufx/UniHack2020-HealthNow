@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Vector;
 
 public class Pacient extends Object{
-    private String username, parola, email, telefon, adresa, cnp;
+    private String username, parola, email, telefon, adresa, cnp, nume;
     private String username_medic = "";
     private Date data_nasterii;
 
@@ -14,14 +14,24 @@ public class Pacient extends Object{
 
 
     public Pacient(String username, String parola, String email,
-                        String telefon, String adresa, String cnp, Date data_nasterii) {
+                   String telefon, String adresa, String cnp, Date data_nasterii,
+                   String Prenume, String Nume) {
         this.username = username;
         this.parola = parola;
         this.email = email;
         this.telefon = telefon;
         this.adresa = adresa;
         this.cnp = cnp;
+        this.nume = Prenume + Nume;
         this.data_nasterii = data_nasterii;
+    }
+
+    public String getNume() {
+        return nume;
+    }
+
+    public void setNume(String Nume, String Prenume) {
+        this.nume = Nume + Prenume;
     }
 
     public String getUsername() {

@@ -87,15 +87,16 @@
 
                 <Button
                     android:id="@+id/sign_pacient"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_width="152dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="130dp"
                     android:background="#A7A8AE"
                     android:enabled="true"
-                    android:text="Inregistrare Pacient"
+                    android:text="Inregistrare pacient"
                     android:textAllCaps="false"
                     android:textStyle="bold"
+                    android:textSize="60px"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
 
@@ -103,26 +104,28 @@
                     android:id="@+id/inapoi_main_inregistrare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="160dp"
+                    android:layout_marginTop="30dp"
                     android:background="#A7A8AE"
                     android:text="Inapoi"
                     android:textAllCaps="false"
                     android:textStyle="bold"
+                    android:textSize="45px"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
+                    app:layout_constraintTop_toBottomOf="@+id/sign_medic" />
 
                 <Button
                     android:id="@+id/sign_medic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_width="152dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="130dp"
                     android:background="#A7A8AE"
                     android:enabled="true"
-                    android:text="Inregistrare Medic"
+                    android:text="Inregistrare medic"
                     android:textAllCaps="false"
                     android:textStyle="bold"
+                    android:textSize="60px"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/sign_pacient" />
 

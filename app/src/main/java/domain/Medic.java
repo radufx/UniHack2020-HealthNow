@@ -5,18 +5,30 @@ import androidx.annotation.Nullable;
 import java.util.Vector;
 
 public class Medic extends Object {
-    private String username, parola, adresa, telefon, email, cnp;
+    private String username, parola, adresa, telefon, email, cnp, nume;
     private Vector<String> username_pacienti = new Vector<String>();
 
     private Vector<ConditieMedicala> conditii_medicale = new Vector<ConditieMedicala>();
 
-    public Medic(String username, String parola, String adresa, String telefon, String email, String cnp) {
+
+
+    public Medic(String username, String parola, String adresa, String telefon, String email, String cnp,
+                 String Prenume, String Nume) {
         this.username = username;
+        this.nume = Prenume + Nume;
         this.parola = parola;
         this.adresa = adresa;
         this.telefon = telefon;
         this.email = email;
         this.cnp = cnp;
+    }
+
+    public String getNume() {
+        return nume;
+    }
+
+    public void setNume(String Nume, String Prenume) {
+        this.nume = Prenume + Nume;
     }
 
     public String getUsername() {

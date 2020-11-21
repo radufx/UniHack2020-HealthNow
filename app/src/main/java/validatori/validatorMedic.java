@@ -6,10 +6,12 @@ import java.util.regex.Pattern;
 public class validatorMedic {
 
     public void validate (String username, String parola, String adresa,
-                          String telefon, String email, String cnp) throws Exception {
+                          String telefon, String email, String cnp,
+                          String Prenume, String Nume) throws Exception {
         String errors = "";
 
         errors += valid_usernamee(username);
+        errors += valid_numee(Prenume, Nume);
         errors += valid_parolaa(parola);
         errors += valid_adresaa(adresa);
         errors += valid_telefonn(telefon);
@@ -18,6 +20,13 @@ public class validatorMedic {
 
         if (errors.length() > 0) throw new Exception(errors);
 
+    }
+
+    public String valid_numee (String Prenume, String Nume){
+        String s = "";
+        if (Prenume == "" || Nume == "")
+            s = "Nume/prenume invalid!\n";
+        return s;
     }
 
     public String valid_usernamee (String username){

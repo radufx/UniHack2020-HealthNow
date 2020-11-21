@@ -50,6 +50,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
 
                 <EditText
+                    android:id="@+id/editTextTextPersonName12"
+                    style="@style/Widget.AppCompat.AutoCompleteTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:alpha="0"
+                    android:ems="10"
+                    android:hint="Prenume"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+
+                <EditText
                     android:id="@+id/editTextTextPersonName9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -78,54 +94,56 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
 
-                <EditText
-                    android:id="@+id/editTextTextPersonName11"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:ems="10"
-                    android:hint="Localitate"
-                    android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
-
                 <Button
                     android:id="@+id/salvare_profil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="85dp"
                     android:layout_marginEnd="16dp"
                     android:background="#A7A8AE"
                     android:text="Salvare"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName11" />
+                    app:layout_constraintTop_toBottomOf="@+id/alege" />
 
                 <Button
                     android:id="@+id/inapoi_inregistrare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="85dp"
                     android:background="#A7A8AE"
                     android:text="Inapoi"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName11" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
 
                 <Button
                     android:id="@+id/alege"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
                     android:text="Alege"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName13"
+                    style="@style/Widget.AppCompat.AutoCompleteTextView"
+                    android:layout_width="379dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="19dp"
+                    android:ems="10"
+                    android:hint="CNP"
+                    android:inputType="textPersonName"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+                    tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

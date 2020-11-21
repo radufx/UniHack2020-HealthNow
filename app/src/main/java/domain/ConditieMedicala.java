@@ -2,7 +2,6 @@ package domain;
 
 public class ConditieMedicala extends Object {
     private String username_pacient, username_medic, descriere, tratament;
-    private int id;
 
     public ConditieMedicala(String username_pacient, String username_medic, String descriere, String tratament) {
         this.username_pacient = username_pacient;

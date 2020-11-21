@@ -7,10 +7,12 @@ import java.util.regex.Pattern;
 public class validatorPacient {
 
     public void validate (String username, String parola, String email,
-                          String telefon, String adresa, String cnp, Date data_nasterii) throws Exception {
+                          String telefon, String adresa, String cnp, Date data_nasterii,
+                          String Prenume, String Nume) throws Exception {
         String errors = "";
 
         errors += valid_usernamee(username);
+        errors += valid_numee(Prenume, Nume);
         errors += valid_parolaa(parola);
         errors += valid_emaill(email);
         errors += valid_telefonn(telefon);
@@ -20,6 +22,13 @@ public class validatorPacient {
 
 
         if (errors.length() > 0) throw new Exception(errors);
+    }
+
+    public String valid_numee (String Prenume, String Nume){
+        String s = "";
+        if (Prenume == "" || Nume == "")
+            s = "Nume/prenume invalid!\n";
+        return s;
     }
 
     public String valid_usernamee (String username){

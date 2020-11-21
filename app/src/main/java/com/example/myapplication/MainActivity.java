@@ -16,9 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TesteRepoPacienti teste_repo = new TesteRepoPacienti();
-        teste_repo.main(null);
-
         button = findViewById(R.id.inscriere);
 
         button.setOnClickListener(new View.OnClickListener() {

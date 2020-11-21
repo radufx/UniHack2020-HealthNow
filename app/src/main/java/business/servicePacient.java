@@ -18,11 +18,12 @@ public class servicePacient {
     }
 
     public void adaugare_pacient (String username, String parola, String email,
-                                  String telefon, String adresa, String cnp, Date data_nasterii) throws Exception {
+                                  String telefon, String adresa, String cnp, Date data_nasterii,
+                                  String Prenume, String Nume) throws Exception {
         this.validator_pacienti.validate(username,parola, email, telefon,
-                    adresa, cnp, data_nasterii);
+                    adresa, cnp, data_nasterii, Prenume, Nume);
         Pacient pacient = new Pacient(username,parola, email, telefon,
-                    adresa, cnp, data_nasterii);
+                    adresa, cnp, data_nasterii, Prenume, Nume);
         this.repo_pacienti.adauga_pacient(pacient);
 
     }
@@ -33,11 +34,12 @@ public class servicePacient {
     }
 
     public void modifica_pacient (String username, String parola, String email,
-                                  String telefon, String adresa, String cnp, Date data_nasterii) throws Exception {
+                                  String telefon, String adresa, String cnp, Date data_nasterii,
+                                  String Prenume, String Nume) throws Exception {
         this.validator_pacienti.validate(username, parola, email, telefon,
-                adresa, cnp, data_nasterii);
+                adresa, cnp, data_nasterii, Prenume,  Nume);
         Pacient pacient = new Pacient(username, parola, email, telefon,
-                adresa, cnp, data_nasterii);
+                adresa, cnp, data_nasterii, Prenume,  Nume);
         this.repo_pacienti.modifica_pacient(pacient);
     }
 
