@@ -17,6 +17,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.Pacienti.PacientiViewModel;
 
+import java.util.ArrayList;
+
 public class SimptomeFragment extends Fragment {
 
     private SimptomeViewModel homeViewModel;
@@ -24,17 +26,34 @@ public class SimptomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        homeViewModel =
-                ViewModelProviders.of(this).get(SimptomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_simptome, container, false);
-        final TextView textView = root.findViewById(R.id.textView4);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
+
+        View view = inflater.inflate(R.layout.fragment_simptome, container, false);
+        ListView lista_simptome = (ListView) view.findViewById(R.id.lista_simptome);
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Ana");
+        arrayList.add("are");
+        arrayList.add("mere");
+        arrayList.add("Ana");
+        arrayList.add("are");
+        arrayList.add("mere");
+        arrayList.add("Ana");
+        arrayList.add("are");
+        arrayList.add("mere");
+        arrayList.add("Ana");
+        arrayList.add("are");
+        arrayList.add("mere");
+        arrayList.add("Ana");
+        arrayList.add("are");
+        arrayList.add("mere");
+        arrayList.add("Ana");
+        arrayList.add("are");
+        arrayList.add("mere");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, arrayList);
+
+        lista_simptome.setAdapter(arrayAdapter);
+        return view;
     }
 }
 
