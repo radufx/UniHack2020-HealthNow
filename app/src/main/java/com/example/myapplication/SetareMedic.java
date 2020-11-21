@@ -21,6 +21,7 @@ public class SetareMedic extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SetareMedic.this, Inregistrare.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -31,6 +32,7 @@ public class SetareMedic extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SetareMedic.this, PaginaStartMedic.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });

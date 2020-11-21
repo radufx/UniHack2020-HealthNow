@@ -40,7 +40,12 @@ public class Inregistrare extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 create_account_medic();
+
+                Intent intent = new Intent(Inregistrare.this, SetareMedic.class);
+                startActivity(intent);
+
             }
         });
 
@@ -61,6 +66,7 @@ public class Inregistrare extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Inregistrare.this, MainActivity.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });

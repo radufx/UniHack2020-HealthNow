@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class SetareProfil extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SetareProfil.this, Inregistrare.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -39,6 +41,7 @@ public class SetareProfil extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SetareProfil.this, PaginaStartPacient.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });

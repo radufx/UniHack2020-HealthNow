@@ -27,6 +27,7 @@ public class Inscriere extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(Inscriere.this, MainActivity.class);
+                    finishAffinity();
                     startActivity(intent);
                 }
         });
@@ -37,6 +38,7 @@ public class Inscriere extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Inscriere.this, PaginaStartPacient.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });
@@ -47,6 +49,7 @@ public class Inscriere extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Inscriere.this, PaginaStartMedic.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });
