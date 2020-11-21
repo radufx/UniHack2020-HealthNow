@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 public class validatorMedic {
 
-    public void validate (String username, String parola, String adresa,
-                          String telefon, String email, String cnp,
+    public void validate (String username, String parola, String email,
+                          String telefon, String adresa, String cnp,
                           String Prenume, String Nume) throws Exception {
         String errors = "";
 

@@ -17,12 +17,12 @@ public class serviceMedic {
     }
 
     public void adaugare_medic (String username, String parola, String email,
-                                  String telefon, String adresa, String cnp, Date data_nasterii,
+                                  String telefon, String adresa, String cnp,
                                 String Prenume, String Nume) throws Exception {
-        this.validator_medici.validate(username,parola, email, adresa,
-                    telefon, cnp, Prenume, Nume);
-        Medic medic = new Medic(username,parola, email, adresa,
-                    telefon, cnp, Prenume, Nume);
+        this.validator_medici.validate(username,parola, email, telefon,
+                    adresa, cnp, Prenume, Nume);
+        Medic medic = new Medic(username,parola, adresa, telefon,
+                    email, cnp, Prenume, Nume);
         this.repo_medici.adauga_medic(medic);
     }
 
@@ -32,12 +32,12 @@ public class serviceMedic {
     }
 
     public void modifica_medic (String username, String parola, String email,
-                                  String telefon, String adresa, String cnp, Date data_nasterii,
+                                String telefon, String adresa, String cnp,
                                 String Prenume, String Nume) throws Exception {
-        this.validator_medici.validate(username,parola, email, adresa,
-                telefon, cnp, Prenume, Nume);
-        Medic medic = new Medic(username,parola, email, adresa,
-                telefon, cnp, Prenume, Nume);
+        this.validator_medici.validate(username,parola, email, telefon,
+                adresa, cnp, Prenume, Nume);
+        Medic medic = new Medic(username,parola, adresa, telefon,
+                email, cnp, Prenume, Nume);
         this.repo_medici.modifica_medic(medic);
     }
 
