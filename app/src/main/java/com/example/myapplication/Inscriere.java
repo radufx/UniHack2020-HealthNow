@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class Inscriere extends AppCompatActivity {
     private Button button;
 
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class Inscriere extends AppCompatActivity {
             }
         });
 
+        mAuth = FirebaseAuth.getInstance();
 
 
     }
@@ -54,8 +59,7 @@ public class Inscriere extends AppCompatActivity {
     @Override
     protected void onStart (){
         super.onStart();
-
-
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
     }
 }

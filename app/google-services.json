@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "505463753606",
+    "firebase_url": "https://healthnow-6621c.firebaseio.com",
+    "project_id": "healthnow-6621c",
+    "storage_bucket": "healthnow-6621c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505463753606:android:b6240e1354f846bbb93a07",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505463753606-rr25l6m6gi0g2k51pdfikhvpe8iu596i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "127dceebb73e18fcd83395df27d70a8d3fe6f052"
+          }
+        },
+        {
+          "client_id": "505463753606-d0mrhakf69s76g07e10srr0gnuu27npd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD72jgKKwfeDe0JoH90VCNHdVuuPinP-eM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505463753606-d0mrhakf69s76g07e10srr0gnuu27npd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

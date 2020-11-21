@@ -4,6 +4,7 @@ import java.util.Date;
 
 import domain.ConditieMedicala;
 import domain.Medic;
+import domain.Pacient;
 import infrastructura.repositoryMedic;
 import validatori.validatorMedic;
 
@@ -17,12 +18,12 @@ public class serviceMedic {
     }
 
     public void adaugare_medic (String username, String parola, String email,
-                                  String telefon, String adresa, String cnp,
+                                String telefon, String adresa, String cnp,
                                 String Prenume, String Nume) throws Exception {
         this.validator_medici.validate(username,parola, email, telefon,
-                    adresa, cnp, Prenume, Nume);
+                adresa, cnp, Prenume, Nume);
         Medic medic = new Medic(username,parola, adresa, telefon,
-                    email, cnp, Prenume, Nume);
+                email, cnp, Prenume, Nume);
         this.repo_medici.adauga_medic(medic);
     }
 
@@ -46,9 +47,12 @@ public class serviceMedic {
         return medic;
     }
 
-    public void modifica_conditie_medicala (int indice, String username, String tratament) throws Exception {
+    public void modifica_conditie_medicala (String username, String username_pacient, int index,
+                                            servicePacient srv_pacient, String tratament) throws Exception {
         Medic medic = this.cauta_medic(username);
-        medic.get_conditie_medicala(indice).setTratament(tratament);
+        Pacient pacient = srv_pacient.cauta_pacient(username_pacient);
+        pacient.getConditii_medicale().get(index).setTratament(tratament);
+
     }
 
     public int get_size (){

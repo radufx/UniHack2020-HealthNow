@@ -1,7 +1,9 @@
 package validatori;
 
+import java.net.InetAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class validatorMedic {
 
@@ -31,23 +33,25 @@ public class validatorMedic {
 
     public String valid_usernamee (String username){
         String s = "";
-        if (username == "")
+        if (username.isEmpty())
             s = "Username invalid!\n" ;
         return s;
     }
 
     public String valid_parolaa (String parola){
         String s = "";
-        if (parola == "")
-            s = "Username invalid!\n" ;
+        if (parola.isEmpty())
+            s = "Parola invalida!\n" ;
         return s;
     }
 
+
     public String valid_emaill (String email){
         String s = "";
-        String regex = "^[a-zA-Z0-9_+&*-] + (?:\\\\.[a-zA-Z0-9_+&*-]\n" +
-                "+ )*@(?:[a-zA-Z0-9-]+\\\\.) + [a-zA-Z]{2,7}";
-        if (!email.matches(regex)) s =  "Adresa e-mail invalida!\n";
+        String regex = "^[A-Za-z0-9+_.-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) s +=  "Adresa e-mail invalida!\n";
         return s;
     }
 

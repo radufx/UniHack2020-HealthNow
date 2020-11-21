@@ -8,10 +8,6 @@ public class Medic extends Object {
     private String username, parola, adresa, telefon, email, cnp, nume;
     private Vector<String> username_pacienti = new Vector<String>();
 
-    private Vector<ConditieMedicala> conditii_medicale = new Vector<ConditieMedicala>();
-
-
-
     public Medic(String username, String parola, String adresa, String telefon, String email, String cnp,
                  String Prenume, String Nume) {
         this.username = username;
@@ -79,29 +75,22 @@ public class Medic extends Object {
         this.cnp = cnp;
     }
 
+    public void stergere_pacient (String username){
+        for (int i=0; i<this.username_pacienti.size(); ++i)
+            if (username == this.username_pacienti.get(i)) {
+                this.username_pacienti.remove(i);
+                return;
+            }
+    }
+
+    public void adaugare_pacient (String username){
+        this.username_pacienti.add(username);
+    }
+
     public Vector<String> getUsername_pacienti() {
         return username_pacienti;
     }
 
-    public void add_username_pacient (String username_pacient){
-        this.username_pacienti.add(username_pacient);
-    }
-
-    public void delete_username_pacient (String username_pacient){
-        this.username_pacienti.remove(username_pacient);
-    }
-
-    public ConditieMedicala get_conditie_medicala (int indice){
-        return conditii_medicale.get(indice);
-    }
-
-    public void add_conditie_medicala (ConditieMedicala conditie_medicala){
-        this.conditii_medicale.add(conditie_medicala);
-    }
-
-    public void delete_conditie_medicala (ConditieMedicala conditie_medicala){
-        this.conditii_medicale.remove(conditie_medicala);
-    }
 
     @Override
     public boolean equals(@Nullable Object obj) {

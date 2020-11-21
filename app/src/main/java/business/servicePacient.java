@@ -21,9 +21,9 @@ public class servicePacient {
                                   String telefon, String adresa, String cnp, Date data_nasterii,
                                   String Prenume, String Nume) throws Exception {
         this.validator_pacienti.validate(username,parola, email, telefon,
-                    adresa, cnp, data_nasterii, Prenume, Nume);
+                adresa, cnp, data_nasterii, Prenume, Nume);
         Pacient pacient = new Pacient(username,parola, email, telefon,
-                    adresa, cnp, data_nasterii, Prenume, Nume);
+                adresa, cnp, data_nasterii, Prenume, Nume);
         this.repo_pacienti.adauga_pacient(pacient);
 
     }
@@ -50,6 +50,10 @@ public class servicePacient {
 
     public void seteaza_medic (String username, String username_medic, serviceMedic srv_medici) throws Exception {
         Pacient pacient = this.cauta_pacient(username);
+        if (pacient.getUsername_medic() != ""){
+            Medic medic = srv_medici.cauta_medic(pacient.getUsername_medic());
+            medic.stergere_pacient(username);
+        }
         Medic medic = srv_medici.cauta_medic(username_medic);
         pacient.setUsername_medic(username_medic);
     }
@@ -61,8 +65,7 @@ public class servicePacient {
         }
         ConditieMedicala conditie_medicala = new ConditieMedicala(username, pacient.getUsername_medic(), descriere, "");
         pacient.add_conditie_medicala(conditie_medicala);
-        Medic medic = srv_medici.cauta_medic(pacient.getUsername_medic());
-        medic.add_conditie_medicala(conditie_medicala);
+
     }
 
     public int get_size (){
