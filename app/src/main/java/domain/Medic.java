@@ -90,6 +90,6 @@ public class Medic extends Object {
     @Override
     public boolean equals(@Nullable Object obj) {
         Medic alt_medic = (Medic)obj;
-        return super.equals(this.username == alt_medic.username);
+        return super.equals(this.username.equals(alt_medic.username));
     }
 }
