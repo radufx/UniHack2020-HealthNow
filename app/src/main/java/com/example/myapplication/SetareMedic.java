@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.ui.Setari_Medic.SetariMedicFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +18,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import DomeniuFireBase.MedicFireBase;
 import DomeniuFireBase.PacientFireBase;
@@ -30,6 +34,13 @@ public class SetareMedic extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference database;
 
+    private DatabaseReference users;
+    private DatabaseReference ref;
+    private FirebaseDatabase dBase = FirebaseDatabase.getInstance();
+
+
+    private DatabaseReference usersRef;
+
     private MedicFireBase medic;
 
     @Override
@@ -40,14 +51,14 @@ public class SetareMedic extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
-        seteaza_campuri();
+        //seteaza_campuri();
 
         button = findViewById(R.id.inapoi_inregistrare);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SetareMedic.this, Inregistrare.class);
+                Intent intent = new Intent(SetareMedic.this, SetariMedicFragment.class);
                 finish();
                 startActivity(intent);
             }
@@ -64,6 +75,7 @@ public class SetareMedic extends AppCompatActivity {
                 }
                 catch (Exception e){
                     displayToast(e.toString());
+                    return;
                 }
                 Intent intent = new Intent(SetareMedic.this, PaginaStartMedic.class);
                 finishAffinity();
@@ -74,6 +86,7 @@ public class SetareMedic extends AppCompatActivity {
 
     public void seteaza_campuri (){
 
+        FirebaseUser user = auth.getCurrentUser();
 
         database.addValueEventListener(new ValueEventListener() {
             @Override
@@ -86,9 +99,8 @@ public class SetareMedic extends AppCompatActivity {
 
             }
         });
-        if (medic == null) {
-            return;
-        }
+
+
         EditText txt = (EditText)SetareMedic.this.findViewById(R.id.editTextTextPersonName4);
         txt.setText(medic.getNume());
         txt = (EditText)SetareMedic.this.findViewById(R.id.editTextTextPersonName5);
@@ -111,12 +123,15 @@ public class SetareMedic extends AppCompatActivity {
     }
 
     public void creeaza_medic () throws Exception {
-
         validatorMedicFireBase validatorMedic = new validatorMedicFireBase();
-        validatorMedic.validate(this.nume, this.prenume, this.cnp, this.telefon);
-        MedicFireBase medic = new MedicFireBase(this.nume, this.prenume, this.cnp, this.telefon);
+       // validatorMedic.validate(this.nume, this.prenume, this.cnp, this.telefon);
+        medic = new MedicFireBase(this.nume, this.prenume, this.cnp, this.telefon);
         String id = get_id();
-        database.child("medic").child(id).setValue(medic);
+        ref = dBase.getReference();
+        users = ref.child("medic");
+        Map<String, MedicFireBase> medici = new HashMap<>();
+        medici.put(id, medic);
+        users.setValue(medici);
     }
 
     public String get_id (){

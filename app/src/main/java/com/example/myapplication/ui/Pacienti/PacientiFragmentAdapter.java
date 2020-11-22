@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import DomeniuFireBase.PacientFireBase;
@@ -61,9 +62,9 @@ public class PacientiFragmentAdapter extends
             nameTextView4 = itemView.findViewById(R.id.txtAdresa4);
         }
     }
-    private List<PacientFireBase> mPacienti;
+    private List<PacientFireBase> mPacienti = new ArrayList<>();
 
     public PacientiFragmentAdapter(List<PacientFireBase> pacienti) {
-        mPacienti = pacienti;
+        this.mPacienti = pacienti;
     }
 }

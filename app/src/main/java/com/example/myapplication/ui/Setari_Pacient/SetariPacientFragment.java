@@ -17,6 +17,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.ModificaCont;
 import com.example.myapplication.R;
+import com.example.myapplication.SetareMedic;
+import com.example.myapplication.SetareProfil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +35,7 @@ public class SetariPacientFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_setari_pacient, container, false);
-        Button setari = (Button) view.findViewById(R.id.setari_cont);
+        Button setari = (Button) view.findViewById(R.id.setari_cont2);
         setari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +46,7 @@ public class SetariPacientFragment extends Fragment {
         });
 
         view = inflater.inflate(R.layout.fragment_setari_pacient, container, false);
-        Button stergere = (Button) view.findViewById(R.id.stergere_cont);
+        Button stergere = (Button) view.findViewById(R.id.stergere_cont2);
         stergere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +55,17 @@ public class SetariPacientFragment extends Fragment {
                 database.removeValue();
                 user.delete();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                getActivity().finishAffinity();
+                startActivity(intent);
+            }
+        });
+
+        Button modifica_profil = view.findViewById(R.id.setari_cont3);
+
+        modifica_profil.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View v){
+                Intent intent = new Intent(getActivity(), SetareProfil.class);
                 getActivity().finishAffinity();
                 startActivity(intent);
             }

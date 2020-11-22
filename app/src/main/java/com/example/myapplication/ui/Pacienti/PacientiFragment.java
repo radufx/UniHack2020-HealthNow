@@ -33,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import DomeniuFireBase.MedicFireBase;
 import DomeniuFireBase.PacientFireBase;
@@ -41,7 +42,7 @@ import domain.Pacient;
 public class PacientiFragment extends Fragment {
 
     private DatabaseReference dBase;
-    ArrayList<PacientFireBase> pacienti;
+    private List<PacientFireBase> pacienti = new ArrayList<>() ;
     private View view;
     private ListView lista_pacienti;
     private RecyclerView rvPacienti;
@@ -56,9 +57,6 @@ public class PacientiFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     PacientFireBase pacient = snapshot.getValue(PacientFireBase.class);
                     pacienti.add(new PacientFireBase(pacient.getNume(), pacient.getPrenume(), pacient.getAdresa(), pacient.getData_nasterii(), pacient.getCnp()));
-
-                    System.out.println(pacient.getNume() + pacient.getPrenume() + pacient.getCnp() + pacient.getData_nasterii() + pacient.getAdresa());
-                    System.out.println(snapshot);
                 }
                 PacientiFragmentAdapter adapter = new PacientiFragmentAdapter(pacienti);
 

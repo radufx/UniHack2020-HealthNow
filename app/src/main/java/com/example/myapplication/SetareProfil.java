@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.ui.Setari_Pacient.SetariPacientFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import DomeniuFireBase.PacientFireBase;
 import ValidatoriFireBase.validatorPacientFireBase;
@@ -42,6 +45,13 @@ public class SetareProfil extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference database;
 
+    private DatabaseReference users;
+    private DatabaseReference ref;
+    private FirebaseDatabase dBase = FirebaseDatabase.getInstance();
+
+
+    private DatabaseReference usersRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +60,7 @@ public class SetareProfil extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
-        seteaza_campuri();
+        //seteaza_campuri();
 
         setContentView(R.layout.activity_setare_profil);
 
@@ -59,7 +69,7 @@ public class SetareProfil extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SetareProfil.this, Inregistrare.class);
+                Intent intent = new Intent(SetareProfil.this, SetariPacientFragment.class);
                 finish();
                 startActivity(intent);
             }
@@ -70,11 +80,14 @@ public class SetareProfil extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SetareProfil.this, PaginaStartPacient.class);
-                if (!validate_input()){
-
-                    return;
+                salveaza_campuri();
+                try {
+                    creeaza_pacient();
                 }
+                catch (Exception e){
+                    displayToast(e.toString());
+                }
+                Intent intent = new Intent(SetareProfil.this, PaginaStartPacient.class);
                 finishAffinity();
                 startActivity(intent);
             }
@@ -109,7 +122,6 @@ public class SetareProfil extends AppCompatActivity {
     }
 
     public void seteaza_campuri (){
-
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -149,12 +161,15 @@ public class SetareProfil extends AppCompatActivity {
         this.cnp = txt.getText().toString();
     }
 
-    public void creeaza_pacient() throws Exception {
+    public void creeaza_pacient() {
         validatorPacientFireBase validatorPacient = new validatorPacientFireBase();
-        validatorPacient.validate(this.nume, this.prenume, this.adresa, this.cnp);
-        PacientFireBase pacient = new PacientFireBase(this.nume, this.prenume, this.adresa, this.data_nasterii, this.cnp);
+        pacient = new PacientFireBase(this.nume, this.prenume, this.adresa, this.data_nasterii, this.cnp);
         String id = get_id();
-        database.child("pacient").child(id).setValue(pacient);
+        ref = dBase.getReference();
+        users = ref.child("pacient");
+        Map<String, PacientFireBase> pacienti = new HashMap<>();
+        pacienti.put(id, pacient);
+        users.setValue(pacienti);
     }
 
     public String get_id() {

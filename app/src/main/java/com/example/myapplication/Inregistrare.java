@@ -136,20 +136,20 @@ public class Inregistrare extends AppCompatActivity {
     }
 
     public void creeaza_pacient() {
-        PacientFireBase pacient = new PacientFireBase("1", "2", "3", "4", "5");
+        PacientFireBase pacient = new PacientFireBase("nume", "prenume", "adresa", "data nasterii", "cnp");
         String id = get_id();
-        ref = dBase.getReference("pacient");
-        users = ref.child(id);
+        ref = dBase.getReference();
+        users = ref.child("pacient");
         Map<String, PacientFireBase> pacienti = new HashMap<>();
         pacienti.put(id, pacient);
         users.setValue(pacienti);
     }
 
     public void creeaza_medic (){
-        MedicFireBase medic = new MedicFireBase("a", "b", "c", "d");
+        MedicFireBase medic = new MedicFireBase("nume", "prenume", "cnp", "telefon");
         String id = get_id();
-        ref = dBase.getReference("medic");
-        users = ref.child(id);
+        ref = dBase.getReference();
+        users = ref.child("medic");
         Map<String, MedicFireBase> medici = new HashMap<>();
         medici.put(id, medic);
         users.setValue(medici);

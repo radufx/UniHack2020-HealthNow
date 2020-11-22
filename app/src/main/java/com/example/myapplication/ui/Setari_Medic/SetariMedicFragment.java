@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.ModificaCont;
 import com.example.myapplication.R;
+import com.example.myapplication.SetareMedic;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -50,6 +51,17 @@ public class SetariMedicFragment extends Fragment {
                 FirebaseUser user = mAuth.getCurrentUser();
                 user.delete();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                getActivity().finishAffinity();
+                startActivity(intent);
+            }
+        });
+
+        Button modifica_profil = view.findViewById(R.id.setari_cont3);
+
+        modifica_profil.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View v){
+                Intent intent = new Intent(getActivity(), SetareMedic.class);
                 getActivity().finishAffinity();
                 startActivity(intent);
             }

@@ -1,0 +1,103 @@
+Index: app/src/main/java/com/example/myapplication/Inregistrare.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Switch;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\nimport DomeniuFireBase.MedicFireBase;\r\nimport DomeniuFireBase.PacientFireBase;\r\nimport ValidatoriFireBase.validatorMedicFireBase;\r\nimport ValidatoriFireBase.validatorPacientFireBase;\r\nimport validatori.validatorMedic;\r\n\r\npublic class Inregistrare extends AppCompatActivity {\r\n    private Button button;\r\n    private Switch sw;\r\n    private FirebaseAuth mAuth = FirebaseAuth.getInstance();\r\n    private Boolean success = true;\r\n\r\n    private FirebaseAuth auth;\r\n    private DatabaseReference database;\r\n\r\n    private DatabaseReference users;\r\n    private DatabaseReference ref;\r\n    private FirebaseDatabase dBase = FirebaseDatabase.getInstance();\r\n\r\n\r\n    private DatabaseReference usersRef;\r\n\r\n\r\n\r\n    private static final String TAG = \"EmailPassword\";\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_inregistrare);\r\n\r\n        button = findViewById(R.id.sign_inregistrare);\r\n        sw = findViewById(R.id.sw_pacient_medic);\r\n\r\n        auth = FirebaseAuth.getInstance();\r\n        database = FirebaseDatabase.getInstance().getReference();\r\n\r\n        button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                success = true;\r\n                create_account();\r\n\r\n\r\n            }\r\n        });\r\n\r\n\r\n        button = findViewById(R.id.inapoi_main_inregistrare);\r\n\r\n        button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(Inregistrare.this, MainActivity.class);\r\n                finishAffinity();\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    public void onStart (){\r\n        super.onStart();\r\n        FirebaseUser currentUser = mAuth.getCurrentUser();\r\n    }\r\n\r\n    private void create_account() {\r\n\r\n\r\n        EditText txt = (EditText) Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);\r\n        String email = txt.getText().toString();\r\n        txt = (EditText) Inregistrare.this.findViewById(R.id.editTextTextPassword);\r\n        String parola = txt.getText().toString();\r\n\r\n\r\n        Log.d(TAG, \"createAccount:\" + email);\r\n\r\n        String erori = valid_input();\r\n        Log.d(TAG, \"erori\" + erori);\r\n\r\n        if (erori.length() > 0) {\r\n            displayToast(erori);\r\n            return;\r\n        }\r\n\r\n        mAuth.createUserWithEmailAndPassword(email, parola)\r\n                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<AuthResult> task) {\r\n                        if (task.isSuccessful()) {\r\n                            Log.d(TAG, \"createUserWithEmail:success\");\r\n                            FirebaseUser user = mAuth.getCurrentUser();\r\n                            if (sw.isChecked() == true) {\r\n                                creeaza_medic();\r\n                            }\r\n                            else{\r\n                                creeaza_pacient();\r\n                            }\r\n                            Intent intent = new Intent(Inregistrare.this, ConfirmareMail.class);\r\n                            startActivity(intent);\r\n                            finishAffinity();\r\n                        } else {\r\n                            Log.w(TAG, \"createUserWithEmail:failure\", task.getException());\r\n                            Toast.makeText(Inregistrare.this, \"Adresa de e-mail deja existenta.\",\r\n                                    Toast.LENGTH_SHORT).show();\r\n                            EditText txt = (EditText) Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);\r\n                            txt.setText(\"\");\r\n                        }\r\n                    }\r\n                });\r\n    }\r\n\r\n    public void creeaza_pacient() {\r\n        PacientFireBase pacient = new PacientFireBase(\"1\", \"2\", \"3\", \"4\", \"5\");\r\n        String id = get_id();\r\n        ref = dBase.getReference(\"pacient\");\r\n        users = ref.child(id);\r\n        Map<String, PacientFireBase> pacienti = new HashMap<>();\r\n        pacienti.put(id, pacient);\r\n        users.setValue(pacienti);\r\n    }\r\n\r\n    public void creeaza_medic (){\r\n        MedicFireBase medic = new MedicFireBase(\"a\", \"b\", \"c\", \"d\");\r\n        String id = get_id();\r\n        ref = dBase.getReference(\"medic\");\r\n        users = ref.child(id);\r\n        Map<String, MedicFireBase> medici = new HashMap<>();\r\n        medici.put(id, medic);\r\n        users.setValue(medici);\r\n    }\r\n\r\n    public String get_id (){\r\n        String ans = \"\";\r\n        FirebaseUser user = auth.getCurrentUser();\r\n        ans = user.getUid();\r\n        return ans;\r\n    }\r\n\r\n    private String valid_input (){\r\n\r\n        EditText txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextEmailAddress2);\r\n        String email = txt.getText().toString();\r\n        txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextPassword3);\r\n        String confirmare_parola = txt.getText().toString();\r\n        txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextPassword);\r\n        String parola = txt.getText().toString();\r\n        txt = (EditText)Inregistrare.this.findViewById(R.id.editTextTextPersonName2);\r\n        String username = txt.getText().toString();\r\n\r\n        validatorMedic validator = new validatorMedic();\r\n        String errors = \"\";\r\n        errors += validator.valid_usernamee(username);\r\n        errors += validator.valid_emaill(email);\r\n        errors += validator.valid_parolaa(parola);\r\n\r\n        if (!parola.equals(confirmare_parola)) errors += \"Parolele nu coincid!\\n\";\r\n\r\n        return errors;\r\n    }\r\n\r\n\r\n    public void displayToast (String mesaj){\r\n        Toast.makeText(Inregistrare.this, mesaj, Toast.LENGTH_LONG).show();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myapplication/Inregistrare.java	(revision 0c1347c39278d5fe3587579ea064bcf1e523193a)
++++ app/src/main/java/com/example/myapplication/Inregistrare.java	(date 1606038712925)
+@@ -138,8 +138,8 @@
+     public void creeaza_pacient() {
+         PacientFireBase pacient = new PacientFireBase("1", "2", "3", "4", "5");
+         String id = get_id();
+-        ref = dBase.getReference("pacient");
+-        users = ref.child(id);
++        ref = dBase.getReference();
++        users = ref.child("pacient");
+         Map<String, PacientFireBase> pacienti = new HashMap<>();
+         pacienti.put(id, pacient);
+         users.setValue(pacienti);
+@@ -148,8 +148,8 @@
+     public void creeaza_medic (){
+         MedicFireBase medic = new MedicFireBase("a", "b", "c", "d");
+         String id = get_id();
+-        ref = dBase.getReference("medic");
+-        users = ref.child(id);
++        ref = dBase.getReference();
++        users = ref.child("medic");
+         Map<String, MedicFireBase> medici = new HashMap<>();
+         medici.put(id, medic);
+         users.setValue(medici);
+Index: app/src/main/java/com/example/myapplication/ui/Pacienti/PacientiFragmentAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.ui.Pacienti;\r\n\r\nimport android.content.Context;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.myapplication.R;\r\n\r\nimport java.util.List;\r\n\r\nimport DomeniuFireBase.PacientFireBase;\r\n\r\npublic class PacientiFragmentAdapter extends\r\n        RecyclerView.Adapter<PacientiFragmentAdapter.ViewHolder> {\r\n\r\n    @Override\r\n    public PacientiFragmentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {\r\n        Context context = parent.getContext();\r\n        LayoutInflater inflater = LayoutInflater.from(context);\r\n\r\n        View contactView = inflater.inflate(R.layout.format_pacient, parent, false);\r\n\r\n        PacientiFragmentAdapter.ViewHolder viewHolder = new PacientiFragmentAdapter.ViewHolder(contactView);\r\n        return viewHolder;\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(PacientiFragmentAdapter.ViewHolder holder, int position) {\r\n        PacientFireBase pacient = mPacienti.get(position);\r\n\r\n        // Set item views based on your views and data model\r\n        TextView textView = holder.nameTextView;\r\n        TextView textView2 = holder.nameTextView2;\r\n        TextView textView3 = holder.nameTextView3;\r\n        TextView textView4 = holder.nameTextView4;\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return mPacienti.size();\r\n    }\r\n\r\n    public class ViewHolder extends RecyclerView.ViewHolder {\r\n        public TextView nameTextView, nameTextView2, nameTextView3, nameTextView4;\r\n\r\n        public ViewHolder(View itemView) {\r\n            super(itemView);\r\n\r\n            nameTextView = itemView.findViewById(R.id.txtNumePrenume);\r\n            nameTextView2 = itemView.findViewById(R.id.txtCNP);\r\n            nameTextView3 = itemView.findViewById(R.id.txtDataNasterii);\r\n            nameTextView4 = itemView.findViewById(R.id.txtAdresa);\r\n        }\r\n    }\r\n    private List<PacientFireBase> mPacienti;\r\n\r\n    public PacientiFragmentAdapter(List<PacientFireBase> pacienti) {\r\n        mPacienti = pacienti;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myapplication/ui/Pacienti/PacientiFragmentAdapter.java	(revision 0c1347c39278d5fe3587579ea064bcf1e523193a)
++++ app/src/main/java/com/example/myapplication/ui/Pacienti/PacientiFragmentAdapter.java	(date 1606039994219)
+@@ -10,6 +10,7 @@
+ 
+ import com.example.myapplication.R;
+ 
++import java.util.ArrayList;
+ import java.util.List;
+ 
+ import DomeniuFireBase.PacientFireBase;
+@@ -56,9 +57,9 @@
+             nameTextView4 = itemView.findViewById(R.id.txtAdresa);
+         }
+     }
+-    private List<PacientFireBase> mPacienti;
++    private List<PacientFireBase> mPacienti = new ArrayList<>();
+ 
+     public PacientiFragmentAdapter(List<PacientFireBase> pacienti) {
+-        mPacienti = pacienti;
++        this.mPacienti = pacienti;
+     }
+ }
+Index: app/src/main/java/com/example/myapplication/ui/Pacienti/PacientiFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.ui.Pacienti;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.lifecycle.Observer;\r\nimport androidx.lifecycle.ViewModelProviders;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.myapplication.Inscriere;\r\nimport com.example.myapplication.PaginaStartMedic;\r\nimport com.example.myapplication.PaginaStartPacient;\r\nimport com.example.myapplication.R;\r\nimport com.example.myapplication.ui.Simptome.Contact;\r\nimport com.example.myapplication.ui.Simptome.ContactsAdapter;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport DomeniuFireBase.MedicFireBase;\r\nimport DomeniuFireBase.PacientFireBase;\r\nimport domain.Pacient;\r\n\r\npublic class PacientiFragment extends Fragment {\r\n\r\n    private DatabaseReference dBase;\r\n    ArrayList<PacientFireBase> pacienti;\r\n    private View view;\r\n    private ListView lista_pacienti;\r\n\r\n    public void Executare(View view, final RecyclerView rvPacienti) {\r\n        dBase = FirebaseDatabase.getInstance().getReference();\r\n        dBase.child(\"pacient\").addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(DataSnapshot dataSnapshot) {\r\n                long nrPacienti = dataSnapshot.getChildrenCount();\r\n                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\r\n                    pacienti = new ArrayList<PacientFireBase>();\r\n                    PacientFireBase pacient = snapshot.getValue(PacientFireBase.class);\r\n                    pacienti.add(new PacientFireBase(pacient.getNume(), pacient.getPrenume(), pacient.getAdresa(), pacient.getData_nasterii(), pacient.getCnp()));\r\n\r\n                    System.out.println(pacient.getNume() + pacient.getPrenume() + pacient.getCnp() + pacient.getData_nasterii() + pacient.getAdresa());\r\n                    System.out.println(snapshot);\r\n                }\r\n                PacientiFragmentAdapter adapter = new PacientiFragmentAdapter(pacienti);\r\n                // Attach the adapter to the recyclerview to populate items\r\n                rvPacienti.setAdapter(adapter);\r\n                // Set layout manager to position the items\r\n                rvPacienti.setLayoutManager(new LinearLayoutManager(getActivity()));\r\n                // That's all!\r\n                //System.out.println(nrPacienti + \"In functie\");\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater,\r\n                              ViewGroup container, Bundle savedInstanceState) {\r\n\r\n        view = inflater.inflate(R.layout.fragment_pacienti, container, false);\r\n        RecyclerView rvPacienti = view.findViewById(R.id.recycler2);\r\n        Executare(view, rvPacienti);\r\n        return view;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myapplication/ui/Pacienti/PacientiFragment.java	(revision 0c1347c39278d5fe3587579ea064bcf1e523193a)
++++ app/src/main/java/com/example/myapplication/ui/Pacienti/PacientiFragment.java	(date 1606039822846)
+@@ -33,6 +33,7 @@
+ 
+ import java.util.ArrayList;
+ import java.util.List;
++import java.util.Vector;
+ 
+ import DomeniuFireBase.MedicFireBase;
+ import DomeniuFireBase.PacientFireBase;
+@@ -41,7 +42,7 @@
+ public class PacientiFragment extends Fragment {
+ 
+     private DatabaseReference dBase;
+-    ArrayList<PacientFireBase> pacienti;
++    private List<PacientFireBase> pacienti = new ArrayList<>() ;
+     private View view;
+     private ListView lista_pacienti;
+ 
+@@ -52,13 +53,15 @@
+             public void onDataChange(DataSnapshot dataSnapshot) {
+                 long nrPacienti = dataSnapshot.getChildrenCount();
+                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+-                    pacienti = new ArrayList<PacientFireBase>();
+                     PacientFireBase pacient = snapshot.getValue(PacientFireBase.class);
+                     pacienti.add(new PacientFireBase(pacient.getNume(), pacient.getPrenume(), pacient.getAdresa(), pacient.getData_nasterii(), pacient.getCnp()));
+ 
+                     System.out.println(pacient.getNume() + pacient.getPrenume() + pacient.getCnp() + pacient.getData_nasterii() + pacient.getAdresa());
+                     System.out.println(snapshot);
+                 }
++                for (int i=0; i<pacienti.size(); ++i){
++                    //System.out.println(pacienti.get(i).getCnp());
++                }
+                 PacientiFragmentAdapter adapter = new PacientiFragmentAdapter(pacienti);
+                 // Attach the adapter to the recyclerview to populate items
+                 rvPacienti.setAdapter(adapter);
