@@ -4,57 +4,40 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.Pacienti.PacientiViewModel;
 
 import java.util.ArrayList;
 
 public class SimptomeFragment extends Fragment {
 
-    private SimptomeViewModel homeViewModel;
+    ArrayList<Contact> contacts;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
 
         View view = inflater.inflate(R.layout.fragment_simptome, container, false);
-        ListView lista_simptome = (ListView) view.findViewById(R.id.lista);
+        RecyclerView rvContacts = view.findViewById(R.id.recycler2);
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Ana  cjndop ;do owpdcomed ew9dxopwcmndpw cdcpoec i oiednw x w iecxeiobcnewi");
-        arrayList.add("are");
-        arrayList.add("mere");
-        arrayList.add("Ana");
-        arrayList.add("are");
-        arrayList.add("mere");
-        arrayList.add("Ana");
-        arrayList.add("are");
-        arrayList.add("mere");
-        arrayList.add("Ana");
-        arrayList.add("are");
-        arrayList.add("mere");
-        arrayList.add("Ana");
-        arrayList.add("are");
-        arrayList.add("mere");
-        arrayList.add("Ana");
-        arrayList.add("are");
-        arrayList.add("mere");
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, arrayList);
-
-        lista_simptome.setAdapter(arrayAdapter);
+        // Initialize contacts
+        contacts = Contact.createContactsList(20);
+        // Create adapter passing in the sample user data
+        ContactsAdapter adapter = new ContactsAdapter(contacts);
+        // Attach the adapter to the recyclerview to populate items
+        rvContacts.setAdapter(adapter);
+        // Set layout manager to position the items
+        rvContacts.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // That's all!
         return view;
     }
+
+
 }
 
 

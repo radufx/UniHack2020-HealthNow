@@ -19,11 +19,14 @@ import com.example.myapplication.ModificaCont;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SetariPacientFragment extends Fragment {
 
     private SetariPacientViewModel galleryViewModel;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class SetariPacientFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseUser user = mAuth.getCurrentUser();
+                DatabaseReference database = mDatabase.child("pacient").child(user.getUid());
+                database.removeValue();
                 user.delete();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 getActivity().finishAffinity();

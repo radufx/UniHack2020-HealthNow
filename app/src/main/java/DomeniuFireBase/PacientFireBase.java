@@ -1,6 +1,9 @@
 package DomeniuFireBase;
 
 
+import com.example.myapplication.ui.Simptome.Contact;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -9,11 +12,11 @@ public class PacientFireBase {
 
     private Vector<ConditieFireBase> conditii = new Vector<ConditieFireBase>();
 
-    public PacientFireBase(){
+    public PacientFireBase() {
 
     }
 
-    public PacientFireBase(String nume, String prenume, String adresa, String data_nasterii, String cnp){
+    public PacientFireBase(String nume, String prenume, String adresa, String data_nasterii, String cnp) {
         this.nume = nume;
         this.prenume = prenume;
         this.adresa = adresa;
@@ -21,7 +24,7 @@ public class PacientFireBase {
         this.cnp = cnp;
     }
 
-    public void adaugare_conditie (ConditieFireBase Conditie){
+    public void adaugare_conditie(ConditieFireBase Conditie) {
         this.conditii.add(Conditie);
     }
 
@@ -64,4 +67,5 @@ public class PacientFireBase {
     public void setData_nasterii(String data_nasterii) {
         this.data_nasterii = data_nasterii;
     }
+
 }

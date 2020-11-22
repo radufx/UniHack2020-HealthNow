@@ -159,19 +159,13 @@ public class SetareProfil extends AppCompatActivity {
 
     public String get_id() {
         String ans = "";
-
         FirebaseUser user = auth.getCurrentUser();
-
-        Long tsLong = System.currentTimeMillis()/1000;
-
-        ans = user.getUid() + " __" + tsLong.toString();
-
+        ans = user.getUid();
         return ans;
     }
 
     public boolean validate_input (){
         boolean valid = true;
-
         return valid;
     }
 

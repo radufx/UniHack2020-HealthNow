@@ -160,9 +160,9 @@ public class Inscriere extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
                                                 MedicFireBase medic = snapshot.getValue(MedicFireBase.class);
-                                                if (snapshot.getKey().equals(get_id()))
-                                                {
+                                                if (snapshot.getKey().equals(get_id())) {
                                                     Intent intent = new Intent(Inscriere.this, PaginaStartMedic.class);
                                                     startActivity(intent);
                                                     finishAffinity();
@@ -181,8 +181,6 @@ public class Inscriere extends AppCompatActivity {
                                         }
 
                                     });
-
-
                         }
                         else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -198,13 +196,8 @@ public class Inscriere extends AppCompatActivity {
 
     public String get_id (){
         String ans = "";
-
         FirebaseUser user = auth.getCurrentUser();
-
-        //Long tsLong = System.currentTimeMillis()/1000;
-
         ans = user.getUid();
-
         return ans;
     }
 

@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import DomeniuFireBase.MedicFireBase;
 import DomeniuFireBase.PacientFireBase;
 import ValidatoriFireBase.validatorMedicFireBase;
@@ -34,6 +37,13 @@ public class Inregistrare extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private DatabaseReference database;
+
+    private DatabaseReference users;
+    private DatabaseReference ref;
+    private FirebaseDatabase dBase = FirebaseDatabase.getInstance();
+
+
+    private DatabaseReference usersRef;
 
 
 
@@ -126,26 +136,29 @@ public class Inregistrare extends AppCompatActivity {
     }
 
     public void creeaza_pacient() {
-        PacientFireBase pacient = new PacientFireBase("", "", "", "", "");
+        PacientFireBase pacient = new PacientFireBase("1", "2", "3", "4", "5");
         String id = get_id();
-        database.child("pacient").child(id).setValue(pacient);
+        ref = dBase.getReference("pacient");
+        users = ref.child(id);
+        Map<String, PacientFireBase> pacienti = new HashMap<>();
+        pacienti.put(id, pacient);
+        users.setValue(pacienti);
     }
 
     public void creeaza_medic (){
-        MedicFireBase medic = new MedicFireBase("", "", "", "");
+        MedicFireBase medic = new MedicFireBase("a", "b", "c", "d");
         String id = get_id();
-        database.child("medic").child(id).setValue(medic);
+        ref = dBase.getReference("medic");
+        users = ref.child(id);
+        Map<String, MedicFireBase> medici = new HashMap<>();
+        medici.put(id, medic);
+        users.setValue(medici);
     }
 
     public String get_id (){
         String ans = "";
-
         FirebaseUser user = auth.getCurrentUser();
-
-        //Long tsLong = System.currentTimeMillis()/1000;
-
         ans = user.getUid();
-
         return ans;
     }
 
