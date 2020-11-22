@@ -28,7 +28,9 @@ public class DeconectarePacientFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_deconectare_pacient, container, false);
+
         Button deconectare = (Button) view.findViewById(R.id.deconectare);
+
         deconectare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

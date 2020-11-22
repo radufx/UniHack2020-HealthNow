@@ -6,13 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.Pacienti.PacientiFragment">
 
-    <RelativeLayout
+    <ListView
+        android:id="@+id/lista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/lista"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 </RelativeLayout>

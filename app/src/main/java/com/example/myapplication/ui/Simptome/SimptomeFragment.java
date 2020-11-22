@@ -28,10 +28,10 @@ public class SimptomeFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_simptome, container, false);
-        ListView lista_simptome = (ListView) view.findViewById(R.id.lista_simptome);
+        ListView lista_simptome = (ListView) view.findViewById(R.id.lista);
 
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Ana");
+        arrayList.add("Ana  cjndop ;do owpdcomed ew9dxopwcmndpw cdcpoec i oiednw x w iecxeiobcnewi");
         arrayList.add("are");
         arrayList.add("mere");
         arrayList.add("Ana");

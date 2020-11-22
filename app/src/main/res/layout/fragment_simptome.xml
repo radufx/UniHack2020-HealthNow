@@ -7,13 +7,8 @@
     android:background="#C7E4E8"
     tools:context=".ui.Simptome.SimptomeFragment">
 
-    <RelativeLayout
+    <ListView
+        android:id="@+id/lista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/lista_simptome"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 </RelativeLayout>

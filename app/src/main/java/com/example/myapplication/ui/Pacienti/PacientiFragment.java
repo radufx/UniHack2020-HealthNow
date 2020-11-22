@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 
@@ -26,7 +27,8 @@ public class PacientiFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_simptome, container, false);
+        View view = inflater.inflate(R.layout.fragment_pacienti, container, false);
+
         ListView lista_simptome = (ListView) view.findViewById(R.id.lista);
 
         ArrayList<String> arrayList = new ArrayList<>();
@@ -52,15 +54,6 @@ public class PacientiFragment extends Fragment {
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_expandable_list_item_1, arrayList);
 
         lista_simptome.setAdapter(arrayAdapter);
-
-        lista_simptome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(getActivity(), DiscussAddValue.class);
-                startActivity(intent);
-            }
-        });
         return view;
     }
 }
