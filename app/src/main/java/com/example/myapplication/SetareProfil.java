@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -15,8 +16,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,11 +28,14 @@ import java.util.Date;
 import DomeniuFireBase.PacientFireBase;
 import ValidatoriFireBase.validatorPacientFireBase;
 
+
 public class SetareProfil extends AppCompatActivity {
     private Button button1;
     private Calendar calendar;
     private DatePickerDialog datePick;
     private TextView text;
+
+    private PacientFireBase pacient;
 
     private String nume, prenume, adresa, data_nasterii, cnp;
 
@@ -42,6 +49,8 @@ public class SetareProfil extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
+
+        seteaza_campuri();
 
         setContentView(R.layout.activity_setare_profil);
 
@@ -97,6 +106,34 @@ public class SetareProfil extends AppCompatActivity {
                 datePick.show();
             }
         });
+    }
+
+    public void seteaza_campuri (){
+
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pacient = snapshot.getValue(PacientFireBase.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        if (pacient == null){
+            return;
+        }
+        EditText txt = (EditText)SetareProfil.this.findViewById(R.id.editTextTextPersonName7);
+        txt.setText(pacient.getNume());
+        txt = (EditText)SetareProfil.this.findViewById(R.id.editTextTextPersonName12);
+        txt.setText(pacient.getPrenume());
+        txt = (EditText)SetareProfil.this.findViewById(R.id.editTextTextPersonName9);
+        txt.setText(pacient.getAdresa());
+        txt = (EditText)SetareProfil.this.findViewById(R.id.editTextDate);
+        txt.setText(pacient.getData_nasterii());
+        txt = (EditText)SetareProfil.this.findViewById(R.id.editTextTextPersonName13);
+        txt.setText(pacient.getCnp());
     }
 
     public void salveaza_campuri(){

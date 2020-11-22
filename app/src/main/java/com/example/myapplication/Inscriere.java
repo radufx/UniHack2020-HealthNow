@@ -17,7 +17,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
+import DomeniuFireBase.MedicFireBase;
+import domain.Medic;
 import validatori.validatorMedic;
 
 public class Inscriere extends AppCompatActivity {
@@ -26,6 +34,8 @@ public class Inscriere extends AppCompatActivity {
     private TextView text_box;
 
     private FirebaseAuth mAuth;
+    private FirebaseAuth auth;
+    private DatabaseReference database;
 
     private static final String TAG = "EmailPassword";
 
@@ -37,6 +47,9 @@ public class Inscriere extends AppCompatActivity {
         setContentView(R.layout.activity_inscriere);
 
         button = findViewById(R.id.inapoi_main_inscriere);
+
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
 
         text_box = findViewById(R.id.textView2);
 
@@ -142,9 +155,34 @@ public class Inscriere extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            Intent intent =  new Intent(Inscriere.this, PaginaStartMedic.class);
-                            finishAffinity();
-                            startActivity(intent);
+                            FirebaseDatabase.getInstance().getReference().child("medic")
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                MedicFireBase medic = snapshot.getValue(MedicFireBase.class);
+                                                if (snapshot.getKey().equals(get_id()))
+                                                {
+                                                    Intent intent = new Intent(Inscriere.this, PaginaStartMedic.class);
+                                                    startActivity(intent);
+                                                    finishAffinity();
+                                                    return;
+                                                }
+                                            }
+                                            Intent intent = new Intent(Inscriere.this, PaginaStartPacient.class);
+                                            startActivity(intent);
+                                            finishAffinity();
+                                            return;
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+
+                                    });
+
+
                         }
                         else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -156,6 +194,18 @@ public class Inscriere extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public String get_id (){
+        String ans = "";
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        //Long tsLong = System.currentTimeMillis()/1000;
+
+        ans = user.getUid();
+
+        return ans;
     }
 
     private String valid_input () {

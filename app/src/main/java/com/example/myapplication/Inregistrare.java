@@ -17,7 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import DomeniuFireBase.MedicFireBase;
+import DomeniuFireBase.PacientFireBase;
+import ValidatoriFireBase.validatorMedicFireBase;
+import ValidatoriFireBase.validatorPacientFireBase;
 import validatori.validatorMedic;
 
 public class Inregistrare extends AppCompatActivity {
@@ -25,6 +31,11 @@ public class Inregistrare extends AppCompatActivity {
     private Switch sw;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Boolean success = true;
+
+    private FirebaseAuth auth;
+    private DatabaseReference database;
+
+
 
     private static final String TAG = "EmailPassword";
 
@@ -36,19 +47,13 @@ public class Inregistrare extends AppCompatActivity {
         button = findViewById(R.id.sign_inregistrare);
         sw = findViewById(R.id.sw_pacient_medic);
 
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 success = true;
-                if (sw.isChecked() == true) {
-                    /*intent = new Intent(Inregistrare.this, SetareMedic.class);
-                    startActivity(intent);*/
-                }
-                else{
-                    /*intent = new Intent(Inregistrare.this, SetareProfil.class);
-                    startActivity(intent);*/
-                }
                 create_account();
 
 
@@ -100,6 +105,12 @@ public class Inregistrare extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            if (sw.isChecked() == true) {
+                                creeaza_medic();
+                            }
+                            else{
+                                creeaza_pacient();
+                            }
                             Intent intent = new Intent(Inregistrare.this, ConfirmareMail.class);
                             startActivity(intent);
                             finishAffinity();
@@ -112,6 +123,30 @@ public class Inregistrare extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void creeaza_pacient() {
+        PacientFireBase pacient = new PacientFireBase("", "", "", "", "");
+        String id = get_id();
+        database.child("pacient").child(id).setValue(pacient);
+    }
+
+    public void creeaza_medic (){
+        MedicFireBase medic = new MedicFireBase("", "", "", "");
+        String id = get_id();
+        database.child("medic").child(id).setValue(medic);
+    }
+
+    public String get_id (){
+        String ans = "";
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        //Long tsLong = System.currentTimeMillis()/1000;
+
+        ans = user.getUid();
+
+        return ans;
     }
 
     private String valid_input (){
