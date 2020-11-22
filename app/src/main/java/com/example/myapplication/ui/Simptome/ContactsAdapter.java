@@ -48,10 +48,10 @@ public class ContactsAdapter extends
         public ViewHolder(View itemView) {
             super(itemView);
 
-            nameTextView = itemView.findViewById(R.id.txtNumePrenume);
-            nameTextView2 = itemView.findViewById(R.id.txtCNP);
-            nameTextView3 = itemView.findViewById(R.id.txtDataNasterii);
-            nameTextView4 = itemView.findViewById(R.id.txtAdresa);
+            nameTextView = itemView.findViewById(R.id.txtNumePrenume1);
+            nameTextView2 = itemView.findViewById(R.id.txtCNP2);
+            nameTextView3 = itemView.findViewById(R.id.txtDataNasterii3);
+            nameTextView4 = itemView.findViewById(R.id.txtAdresa4);
         }
     }
     private List<Contact> mContacts;

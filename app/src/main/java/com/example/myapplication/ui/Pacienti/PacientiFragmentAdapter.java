@@ -37,6 +37,10 @@ public class PacientiFragmentAdapter extends
         TextView textView2 = holder.nameTextView2;
         TextView textView3 = holder.nameTextView3;
         TextView textView4 = holder.nameTextView4;
+        textView.setText(pacient.getNume() + " " + pacient.getPrenume());
+        textView2.setText(pacient.getCnp());
+        textView3.setText(pacient.getData_nasterii());
+        textView4.setText(pacient.getAdresa());
     }
 
     @Override
@@ -50,10 +54,11 @@ public class PacientiFragmentAdapter extends
         public ViewHolder(View itemView) {
             super(itemView);
 
-            nameTextView = itemView.findViewById(R.id.txtNumePrenume);
-            nameTextView2 = itemView.findViewById(R.id.txtCNP);
-            nameTextView3 = itemView.findViewById(R.id.txtDataNasterii);
-            nameTextView4 = itemView.findViewById(R.id.txtAdresa);
+
+            nameTextView = itemView.findViewById(R.id.txtNumePrenume1);
+            nameTextView2 = itemView.findViewById(R.id.txtCNP2);
+            nameTextView3 = itemView.findViewById(R.id.txtDataNasterii3);
+            nameTextView4 = itemView.findViewById(R.id.txtAdresa4);
         }
     }
     private List<PacientFireBase> mPacienti;

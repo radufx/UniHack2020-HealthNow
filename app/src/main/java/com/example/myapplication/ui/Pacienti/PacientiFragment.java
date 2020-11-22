@@ -44,15 +44,16 @@ public class PacientiFragment extends Fragment {
     ArrayList<PacientFireBase> pacienti;
     private View view;
     private ListView lista_pacienti;
+    private RecyclerView rvPacienti;
 
-    public void Executare(View view, final RecyclerView rvPacienti) {
+    public void Executare(final View view) {
         dBase = FirebaseDatabase.getInstance().getReference();
         dBase.child("pacient").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long nrPacienti = dataSnapshot.getChildrenCount();
+                pacienti = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    pacienti = new ArrayList<PacientFireBase>();
                     PacientFireBase pacient = snapshot.getValue(PacientFireBase.class);
                     pacienti.add(new PacientFireBase(pacient.getNume(), pacient.getPrenume(), pacient.getAdresa(), pacient.getData_nasterii(), pacient.getCnp()));
 
@@ -60,6 +61,8 @@ public class PacientiFragment extends Fragment {
                     System.out.println(snapshot);
                 }
                 PacientiFragmentAdapter adapter = new PacientiFragmentAdapter(pacienti);
+
+                rvPacienti = view.findViewById(R.id.recycler);
                 // Attach the adapter to the recyclerview to populate items
                 rvPacienti.setAdapter(adapter);
                 // Set layout manager to position the items
@@ -79,8 +82,7 @@ public class PacientiFragment extends Fragment {
                               ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_pacienti, container, false);
-        RecyclerView rvPacienti = view.findViewById(R.id.recycler2);
-        Executare(view, rvPacienti);
+        Executare(view);
         return view;
     }
 }
