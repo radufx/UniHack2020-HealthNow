@@ -56,7 +56,7 @@ public class PacientiFragment extends Fragment {
                     PacientFireBase pacient = snapshot.getValue(PacientFireBase.class);
                     pacienti.add(new PacientFireBase(pacient.getNume(), pacient.getPrenume(), pacient.getAdresa(), pacient.getData_nasterii(), pacient.getCnp()));
 
-                    //System.out.println(pacient.getNume() + pacient.getPrenume() + pacient.getCnp() + pacient.getData_nasterii() + pacient.getAdresa());
+                    System.out.println(pacient.getNume() + pacient.getPrenume() + pacient.getCnp() + pacient.getData_nasterii() + pacient.getAdresa());
                     System.out.println(snapshot);
                 }
                 PacientiFragmentAdapter adapter = new PacientiFragmentAdapter(pacienti);

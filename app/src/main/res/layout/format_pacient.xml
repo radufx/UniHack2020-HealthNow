@@ -17,7 +17,7 @@
         android:paddingTop="12dp">
 
         <TextView
-            android:id="@+id/txtNumePrenume"
+            android:id="@+id/txtNumePrenume1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="15dp"
@@ -27,7 +27,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/txtCNP"
+            android:id="@+id/txtCNP2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="75dp"
@@ -37,7 +37,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/txtDataNasterii"
+            android:id="@+id/txtDataNasterii3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="75dp"
@@ -47,7 +47,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/txtAdresa"
+            android:id="@+id/txtAdresa4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="75dp"
